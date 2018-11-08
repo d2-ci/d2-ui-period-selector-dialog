@@ -1,6 +1,5 @@
 {
   "name": "@dhis2/d2-ui-period-selector-dialog",
-  "version": "5.0.1",
   "description": "Period selector dialog component for DHIS2",
   "main": "./index.js",
   "module": "./index.js",
@@ -35,5 +34,6 @@
   "devDependencies": {
     "babel-jest": "^23.0.1",
     "jest": "^23.1.0"
-  }
+  },
+  "version": "5.0.1"
 }
