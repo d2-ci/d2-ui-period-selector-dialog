@@ -14,9 +14,7 @@ import PeriodSelector from './PeriodSelector';
 
 var styles = {
     dialogContent: {
-        paddingBottom: 0,
-        paddingTop: 0,
-        overflow: 'hidden'
+        overflow: 'hidden' // TODO: Reflow DOM or enforce minimum dialog sizing rather than hiding important UI elements on small screens
     }
 };
 
@@ -75,7 +73,7 @@ var PeriodSelectorDialog = function (_React$Component) {
                 ),
                 React.createElement(
                     DialogActions,
-                    { style: styles.dialogActions },
+                    null,
                     React.createElement(
                         Button,
                         { color: 'primary', onClick: _this.onCloseClick },
