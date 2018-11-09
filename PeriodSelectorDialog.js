@@ -5,6 +5,8 @@ import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructo
 import _inherits from 'babel-runtime/helpers/inherits';
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -14,15 +16,7 @@ import PeriodSelector from './PeriodSelector';
 
 var styles = {
     dialogContent: {
-        paddingBottom: 0,
-        paddingTop: 0,
-        overflow: 'hidden'
-    },
-    dialogActions: {
-        padding: '24px',
-        marginTop: 0,
-        borderTop: '1px solid #E0E0E0'
-
+        overflow: 'hidden' // TODO: Reflow DOM or enforce minimum dialog sizing rather than hiding important UI elements on small screens
     }
 };
 
@@ -56,10 +50,11 @@ var PeriodSelectorDialog = function (_React$Component) {
 
         _this.render = function () {
             var _this$props = _this.props,
+                classes = _this$props.classes,
                 open = _this$props.open,
                 maxWidth = _this$props.maxWidth,
                 fullWidth = _this$props.fullWidth,
-                remaindingProps = _objectWithoutProperties(_this$props, ['open', 'maxWidth', 'fullWidth']);
+                remaindingProps = _objectWithoutProperties(_this$props, ['classes', 'open', 'maxWidth', 'fullWidth']);
 
             return React.createElement(
                 Dialog,
@@ -76,20 +71,20 @@ var PeriodSelectorDialog = function (_React$Component) {
                 ),
                 React.createElement(
                     DialogContent,
-                    { style: styles.dialogContent },
+                    { className: classes.dialogContent },
                     React.createElement(PeriodSelector, remaindingProps)
                 ),
                 React.createElement(
                     DialogActions,
-                    { style: styles.dialogActions },
+                    null,
                     React.createElement(
                         Button,
-                        { onClick: _this.onCloseClick },
+                        { color: 'primary', onClick: _this.onCloseClick },
                         _this.i18n.getTranslation('Hide')
                     ),
                     React.createElement(
                         Button,
-                        { style: { backgroundColor: '#004BA0', color: 'white' }, onClick: _this.onUpdateClick },
+                        { variant: 'contained', color: 'primary', onClick: _this.onUpdateClick },
                         _this.i18n.getTranslation('Update')
                     )
                 )
@@ -116,6 +111,7 @@ PeriodSelectorDialog.defaultProps = {
 };
 
 PeriodSelectorDialog.propTypes = {
+    classes: PropTypes.object.isRequired,
     d2: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired,
     fullWidth: PropTypes.bool,
@@ -127,4 +123,4 @@ PeriodSelectorDialog.propTypes = {
     selectedItems: PropTypes.array
 };
 
-export default PeriodSelectorDialog;
+export default withStyles(styles)(PeriodSelectorDialog);
