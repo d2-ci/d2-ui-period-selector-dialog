@@ -21,10 +21,10 @@ var RemoveItemButton = function RemoveItemButton(_ref) {
         'button',
         { className: 'remove-item-button', onClick: action, tabIndex: 0 },
         React.createElement(Close, { style: {
-                fill: '#1976D2',
                 outline: 'none',
                 height: 13,
-                width: 10 }
+                width: 10
+            }
         })
     );
 };

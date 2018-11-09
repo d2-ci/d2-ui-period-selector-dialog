@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
+import i18n from '@dhis2/d2-i18n';
 import PeriodSelector from './PeriodSelector';
 
 var styles = {
@@ -23,32 +24,30 @@ var styles = {
 var PeriodSelectorDialog = function (_React$Component) {
     _inherits(PeriodSelectorDialog, _React$Component);
 
-    function PeriodSelectorDialog(props) {
+    function PeriodSelectorDialog() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, PeriodSelectorDialog);
 
-        var _this = _possibleConstructorReturn(this, (PeriodSelectorDialog.__proto__ || _Object$getPrototypeOf(PeriodSelectorDialog)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.onCloseClick = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = PeriodSelectorDialog.__proto__ || _Object$getPrototypeOf(PeriodSelectorDialog)).call.apply(_ref, [this].concat(args))), _this), _this.onCloseClick = function () {
             _this.props.onClose();
-        };
-
-        _this.onUpdateClick = function () {
+        }, _this.onUpdateClick = function () {
             _this.props.onUpdate(_this.props.selectedItems);
-        };
-
-        _this.onSelect = function (selectedPeriods) {
+        }, _this.onSelect = function (selectedPeriods) {
             _this.props.onSelect(selectedPeriods);
-        };
-
-        _this.onDeselect = function (removedPeriods) {
+        }, _this.onDeselect = function (removedPeriods) {
             var selectedPeriods = _this.props.selectedItems.filter(function (period) {
                 return !removedPeriods.includes(period) && period;
             });
 
             _this.props.onDeselect(selectedPeriods);
-        };
-
-        _this.render = function () {
+        }, _this.render = function () {
             var _this$props = _this.props,
                 classes = _this$props.classes,
                 open = _this$props.open,
@@ -67,7 +66,7 @@ var PeriodSelectorDialog = function (_React$Component) {
                 React.createElement(
                     DialogTitle,
                     null,
-                    _this.i18n.getTranslation('Period')
+                    i18n.t('Period')
                 ),
                 React.createElement(
                     DialogContent,
@@ -80,19 +79,16 @@ var PeriodSelectorDialog = function (_React$Component) {
                     React.createElement(
                         Button,
                         { color: 'primary', onClick: _this.onCloseClick },
-                        _this.i18n.getTranslation('Hide')
+                        i18n.t('Hide')
                     ),
                     React.createElement(
                         Button,
                         { variant: 'contained', color: 'primary', onClick: _this.onUpdateClick },
-                        _this.i18n.getTranslation('Update')
+                        i18n.t('Update')
                     )
                 )
             );
-        };
-
-        _this.i18n = _this.props.d2.i18n;
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     return PeriodSelectorDialog;
@@ -112,7 +108,6 @@ PeriodSelectorDialog.defaultProps = {
 
 PeriodSelectorDialog.propTypes = {
     classes: PropTypes.object.isRequired,
-    d2: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired,
     fullWidth: PropTypes.bool,
     maxWidth: PropTypes.string,

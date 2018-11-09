@@ -5,32 +5,34 @@ import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import i18n from '@dhis2/d2-i18n';
 
 var PeriodTypeButton = function (_Component) {
     _inherits(PeriodTypeButton, _Component);
 
-    function PeriodTypeButton(props, context) {
+    function PeriodTypeButton() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, PeriodTypeButton);
 
-        var _this = _possibleConstructorReturn(this, (PeriodTypeButton.__proto__ || _Object$getPrototypeOf(PeriodTypeButton)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.handleClick = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = PeriodTypeButton.__proto__ || _Object$getPrototypeOf(PeriodTypeButton)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function () {
             _this.props.onClick(_this.props.periodType);
-        };
-
-        _this.render = function () {
+        }, _this.render = function () {
             return React.createElement(
                 Button,
                 {
                     className: 'nav-button ' + (_this.props.periodType === _this.props.activePeriodType ? 'active' : ''),
                     onClick: _this.handleClick
                 },
-                _this.i18n.getTranslation(_this.props.text)
+                i18n.t(_this.props.text)
             );
-        };
-
-        _this.i18n = context.d2.i18n;
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     return PeriodTypeButton;
@@ -41,10 +43,6 @@ PeriodTypeButton.propTypes = {
     activePeriodType: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
-};
-
-PeriodTypeButton.contextTypes = {
-    d2: PropTypes.object
 };
 
 export default PeriodTypeButton;

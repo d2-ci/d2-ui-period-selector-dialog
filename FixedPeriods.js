@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 import FixedPeriodsGenerator from './utils/FixedPeriodsGenerator';
 import PeriodsList from './PeriodsList';
+import i18n from '@dhis2/d2-i18n';
 
 export var defaultState = {
     periodType: 'Weekly',
@@ -80,7 +81,7 @@ var FixedPeriods = function (_Component) {
                     React.createElement(
                         InputLabel,
                         { className: 'input-label', htmlFor: 'period-type' },
-                        _this.i18n.getTranslation('Period type')
+                        i18n.t('Period type')
                     ),
                     React.createElement(
                         Select,
@@ -105,7 +106,7 @@ var FixedPeriods = function (_Component) {
                     React.createElement(
                         InputLabel,
                         { className: 'input-label', htmlFor: 'year' },
-                        _this.i18n.getTranslation('Year')
+                        i18n.t('Year')
                     ),
                     React.createElement(
                         Select,

@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import i18n from '@dhis2/d2-i18n';
 import RelativePeriodsGenerator from './utils/RelativePeriodsGenerator';
 import PeriodsList from './PeriodsList';
 
@@ -18,7 +19,7 @@ export var defaultState = {
 var RelativePeriods = function (_Component) {
     _inherits(RelativePeriods, _Component);
 
-    function RelativePeriods(props, context) {
+    function RelativePeriods(props) {
         _classCallCheck(this, RelativePeriods);
 
         var _this = _possibleConstructorReturn(this, (RelativePeriods.__proto__ || _Object$getPrototypeOf(RelativePeriods)).call(this, props));
@@ -50,7 +51,7 @@ var RelativePeriods = function (_Component) {
                     React.createElement(
                         InputLabel,
                         { className: 'input-label', htmlFor: 'period-type' },
-                        _this.i18n.getTranslation('Period type')
+                        i18n.t('Period type')
                     ),
                     React.createElement(
                         Select,
@@ -90,7 +91,6 @@ var RelativePeriods = function (_Component) {
         };
 
         _this.state = defaultState;
-        _this.i18n = context.d2.i18n;
         _this.periodsGenerator = new RelativePeriodsGenerator();
         return _this;
     }
@@ -103,10 +103,6 @@ RelativePeriods.propTypes = {
     setOfferedPeriods: PropTypes.func.isRequired,
     onDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
-};
-
-RelativePeriods.contextTypes = {
-    d2: PropTypes.object
 };
 
 export default RelativePeriods;
