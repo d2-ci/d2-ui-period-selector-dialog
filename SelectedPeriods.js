@@ -5,8 +5,8 @@ import _inherits from 'babel-runtime/helpers/inherits';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import PeriodsList from './PeriodsList';
 import i18n from '@dhis2/d2-i18n';
+import PeriodsList from './PeriodsList';
 
 var SelectedPeriods = function (_React$Component) {
     _inherits(SelectedPeriods, _React$Component);
@@ -51,7 +51,7 @@ var SelectedPeriods = function (_React$Component) {
                     React.createElement(
                         Button,
                         { onClick: _this.clearPeriods },
-                        i18n.t('Unselect all')
+                        i18n.t('Deselect all')
                     )
                 )
             );

@@ -4,29 +4,39 @@ import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructo
 import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
+import styles from './styles/PeriodListItem.style';
 
 var OFFERED_LIST = 'periods-list-offered';
 
 var UnselectedIcon = function UnselectedIcon() {
     return React.createElement('div', { className: 'unselected-icon' });
 };
+var HighlightedIcon = function HighlightedIcon() {
+    return React.createElement('div', { className: 'highlighted-icon' });
+};
 var SelectedIcon = function SelectedIcon() {
     return React.createElement('div', { className: 'selected-icon' });
 };
 
 var RemoveItemButton = function RemoveItemButton(_ref) {
-    var action = _ref.action;
+    var action = _ref.action,
+        isHighlighted = _ref.isHighlighted;
     return React.createElement(
-        'button',
-        { className: 'remove-item-button', onClick: action, tabIndex: 0 },
-        React.createElement(Close, { style: {
-                outline: 'none',
-                height: 13,
-                width: 10
-            }
-        })
+        IconButton,
+        {
+            style: styles.iconButton,
+            onClick: action,
+            tabIndex: 0
+        },
+        React.createElement(Close, { style: isHighlighted ? styles.highlightedClose : styles.closeIcon })
     );
+};
+
+RemoveItemButton.propTypes = {
+    action: PropTypes.func.isRequired,
+    isHighlighted: PropTypes.bool.isRequired
 };
 
 var PeriodListItem = function (_Component) {
@@ -43,33 +53,29 @@ var PeriodListItem = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref2 = PeriodListItem.__proto__ || _Object$getPrototypeOf(PeriodListItem)).call.apply(_ref2, [this].concat(args))), _this), _this.state = { isHovering: false }, _this.highlightItem = function () {
-            _this.setState({ isHovering: true });
-        }, _this.removeHighlight = function () {
-            _this.setState({ isHovering: false });
-        }, _this.isOfferedList = function () {
-            return _this.props.listClassName === OFFERED_LIST;
-        }, _this.onPeriodClick = function (event) {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref2 = PeriodListItem.__proto__ || _Object$getPrototypeOf(PeriodListItem)).call.apply(_ref2, [this].concat(args))), _this), _this.state = { isHovering: false }, _this.onPeriodClick = function (event) {
             _this.props.onPeriodClick(_this.props.period, _this.props.index, event.shiftKey, event.metaKey);
         }, _this.onDoubleClick = function () {
             _this.props.onDoubleClick(_this.props.period);
         }, _this.onRemovePeriodClick = function (event) {
             event.stopPropagation();
             _this.props.onRemovePeriodClick(_this.props.period);
+        }, _this.isOfferedList = function () {
+            return _this.props.listClassName === OFFERED_LIST;
+        }, _this.highlightItem = function () {
+            _this.setState({ isHovering: true });
+        }, _this.removeHighlight = function () {
+            _this.setState({ isHovering: false });
         }, _this.renderIcon = function () {
+            if (_this.props.period.selected) {
+                return React.createElement(HighlightedIcon, null);
+            }
+
             return _this.isOfferedList() ? React.createElement(UnselectedIcon, null) : React.createElement(SelectedIcon, null);
         }, _this.renderRemoveButton = function () {
-            return _this.isOfferedList() ? null : React.createElement(RemoveItemButton, { action: _this.onRemovePeriodClick });
-        }, _this.renderLabelStyle = function () {
-            if (_this.state.isHovering && !_this.props.period.selected) {
-                return { backgroundColor: '#92C9F7' };
-            } else if (_this.props.period.selected) {
-                return { backgroundColor: '#7EBFF5' };
-            }
-            return {};
+            return _this.isOfferedList() ? null : React.createElement(RemoveItemButton, { isHighlighted: _this.props.period.selected, action: _this.onRemovePeriodClick });
         }, _this.render = function () {
             var className = _this.isOfferedList() ? 'period-offered-label' : 'period-selected-label';
-            var labelStyle = _this.renderLabelStyle();
             var Icon = _this.renderIcon();
             var RemoveButton = _this.renderRemoveButton();
 
@@ -84,7 +90,7 @@ var PeriodListItem = function (_Component) {
                     {
                         role: 'button',
                         tabIndex: 0,
-                        style: labelStyle,
+                        style: _this.props.period.selected ? styles.highlightedContainer : {},
                         onMouseEnter: _this.highlightItem,
                         onMouseLeave: _this.removeHighlight,
                         onClick: _this.onPeriodClick,
@@ -94,7 +100,7 @@ var PeriodListItem = function (_Component) {
                     Icon,
                     React.createElement(
                         'span',
-                        { className: 'list-text' },
+                        { style: _this.props.period.selected ? styles.higlightedText : {}, className: 'list-text' },
                         _this.props.period.name
                     ),
                     RemoveButton
