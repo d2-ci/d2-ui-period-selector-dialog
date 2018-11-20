@@ -26,9 +26,8 @@ var RemoveItemButton = function RemoveItemButton(_ref) {
     return React.createElement(
         IconButton,
         {
-            style: styles.iconButton,
-            onClick: action,
-            tabIndex: 0
+            style: styles.removeItemButton,
+            onClick: action
         },
         React.createElement(Close, { style: isHighlighted ? styles.highlightedClose : styles.closeIcon })
     );

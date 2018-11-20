@@ -5,13 +5,14 @@ import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PeriodTypeButton from './PeriodTypeButton';
 import SelectedPeriods from './SelectedPeriods';
 import { OfferedPeriods } from './OfferedPeriods';
 import PeriodTypes from './PeriodTypes';
+import styles from './styles/PeriodListItem.style';
 import '../css/PeriodSelector.css';
 
 import { setPeriodType, addOfferedPeriods, setOfferedPeriods, setSelectedPeriods, removeOfferedPeriods, toggleOfferedPeriod, addSelectedPeriods, removeSelectedPeriods, toggleSelectedPeriod } from './actions';
@@ -19,12 +20,13 @@ import { setPeriodType, addOfferedPeriods, setOfferedPeriods, setSelectedPeriods
 var SelectButton = function SelectButton(_ref) {
     var action = _ref.action;
     return React.createElement(
-        Button,
+        IconButton,
         {
+            style: styles.arrowButton,
             className: 'select-button',
             onClick: action
         },
-        React.createElement(ArrowForwardIcon, null)
+        React.createElement(ArrowForwardIcon, { style: styles.arrowIcon })
     );
 };
 
@@ -35,12 +37,13 @@ SelectButton.propTypes = {
 var DeselectButton = function DeselectButton(_ref2) {
     var action = _ref2.action;
     return React.createElement(
-        Button,
+        IconButton,
         {
+            style: styles.arrowButton,
             className: 'select-button',
             onClick: action
         },
-        React.createElement(ArrowBackIcon, null)
+        React.createElement(ArrowBackIcon, { style: styles.arrowIcon })
     );
 };
 
@@ -59,7 +62,6 @@ var Periods = function (_Component) {
         _this.onPeriodTypeClick = function (periodType) {
             if (_this.props.periodType !== periodType) {
                 _this.props.setPeriodType(periodType);
-                _this.props.setOfferedPeriods([]);
             }
         };
 
@@ -105,6 +107,15 @@ var Periods = function (_Component) {
             _this.props.setSelectedPeriods([]);
         };
 
+        _this.getOfferedPeriods = function () {
+            var selectedIds = _this.props.selectedItems.map(function (item) {
+                return item.id;
+            });
+            return _this.props.offeredPeriods.periods.filter(function (item) {
+                return !selectedIds.includes(item.id);
+            });
+        };
+
         _this.renderPeriodTypeButtons = function () {
             return React.createElement(
                 Fragment,
@@ -136,6 +147,7 @@ var Periods = function (_Component) {
         _this.render = function () {
             var PeriodTypeButtons = _this.renderPeriodTypeButtons();
             var SelectButtons = _this.renderSelectButtons();
+            var unselectedItems = _this.getOfferedPeriods();
 
             return React.createElement(
                 'div',
@@ -149,7 +161,7 @@ var Periods = function (_Component) {
                         { className: 'block options' },
                         React.createElement(OfferedPeriods, {
                             periodType: _this.props.periodType,
-                            items: _this.props.offeredPeriods.periods,
+                            items: unselectedItems,
                             onDoubleClick: _this.onDoubleClick,
                             onPeriodClick: _this.props.toggleOfferedPeriod,
                             setOfferedPeriods: _this.props.setOfferedPeriods,
