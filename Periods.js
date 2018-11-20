@@ -43,7 +43,7 @@ var DeselectButton = function DeselectButton(_ref2) {
 var Periods = function (_Component) {
     _inherits(Periods, _Component);
 
-    function Periods(props, context) {
+    function Periods(props) {
         _classCallCheck(this, Periods);
 
         var _this = _possibleConstructorReturn(this, (Periods.__proto__ || _Object$getPrototypeOf(Periods)).call(this, props));
@@ -166,7 +166,6 @@ var Periods = function (_Component) {
             );
         };
 
-        _this.i18n = context.d2.i18n;
         _this.props.setSelectedPeriods(_this.props.selectedItems);
         return _this;
     }
@@ -190,10 +189,6 @@ Periods.propTypes = {
     removeSelectedPeriods: PropTypes.func.isRequired,
     toggleOfferedPeriod: PropTypes.func.isRequired,
     toggleSelectedPeriod: PropTypes.func.isRequired
-};
-
-Periods.contextTypes = {
-    d2: PropTypes.object
 };
 
 var mapStateToProps = function mapStateToProps(state) {

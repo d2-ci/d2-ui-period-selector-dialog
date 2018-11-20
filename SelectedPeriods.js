@@ -6,20 +6,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import PeriodsList from './PeriodsList';
+import i18n from '@dhis2/d2-i18n';
 
 var SelectedPeriods = function (_React$Component) {
     _inherits(SelectedPeriods, _React$Component);
 
-    function SelectedPeriods(props, context) {
+    function SelectedPeriods() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, SelectedPeriods);
 
-        var _this = _possibleConstructorReturn(this, (SelectedPeriods.__proto__ || _Object$getPrototypeOf(SelectedPeriods)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.clearPeriods = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SelectedPeriods.__proto__ || _Object$getPrototypeOf(SelectedPeriods)).call.apply(_ref, [this].concat(args))), _this), _this.clearPeriods = function () {
             _this.props.onClearAll(_this.props.items);
-        };
-
-        _this.render = function () {
+        }, _this.render = function () {
             return React.createElement(
                 'div',
                 { className: 'selector-area' },
@@ -30,7 +35,7 @@ var SelectedPeriods = function (_React$Component) {
                         'span',
                         { className: 'subtitle' },
                         ' ',
-                        _this.i18n.getTranslation('Selected periods'),
+                        i18n.t('Selected periods'),
                         ' '
                     )
                 ),
@@ -46,14 +51,11 @@ var SelectedPeriods = function (_React$Component) {
                     React.createElement(
                         Button,
                         { onClick: _this.clearPeriods },
-                        _this.i18n.getTranslation('Clear all')
+                        i18n.t('Clear all')
                     )
                 )
             );
-        };
-
-        _this.i18n = context.d2.i18n;
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     return SelectedPeriods;
@@ -64,10 +66,6 @@ SelectedPeriods.propTypes = {
     onClearAll: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
     onRemovePeriodClick: PropTypes.func.isRequired
-};
-
-SelectedPeriods.contextTypes = {
-    d2: PropTypes.object
 };
 
 export default SelectedPeriods;
