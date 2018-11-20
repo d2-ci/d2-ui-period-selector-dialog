@@ -36,5 +36,8 @@ export default {
     },
     higlightedText: {
         color: 'white'
+    },
+    inputLabel: {
+        color: '#494949'
     }
 };

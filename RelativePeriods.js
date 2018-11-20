@@ -12,6 +12,7 @@ import i18n from '@dhis2/d2-i18n';
 import Button from '@material-ui/core/Button';
 import RelativePeriodsGenerator from './utils/RelativePeriodsGenerator';
 import PeriodsList from './PeriodsList';
+import styles from './styles/PeriodListItem.style';
 
 export var defaultState = {
     periodType: 'Months'
@@ -56,7 +57,7 @@ var RelativePeriods = function (_Component) {
                     { className: 'form-control period-type' },
                     React.createElement(
                         InputLabel,
-                        { className: 'input-label', htmlFor: 'period-type' },
+                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'period-type' },
                         i18n.t('Period type')
                     ),
                     React.createElement(
