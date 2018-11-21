@@ -13,7 +13,8 @@ import SelectedPeriods from './SelectedPeriods';
 import { OfferedPeriods } from './OfferedPeriods';
 import PeriodTypes from './PeriodTypes';
 import styles from './styles/PeriodListItem.style';
-import '../css/PeriodSelector.css';
+// eslint-disable-next-line import/no-unresolved
+import './PeriodSelector.css';
 
 import { setPeriodType, addOfferedPeriods, setOfferedPeriods, setSelectedPeriods, removeOfferedPeriods, toggleOfferedPeriod, addSelectedPeriods, removeSelectedPeriods, toggleSelectedPeriod } from './actions';
 
