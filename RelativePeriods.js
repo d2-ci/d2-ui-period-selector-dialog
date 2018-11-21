@@ -9,11 +9,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
+import Button from '@material-ui/core/Button';
 import RelativePeriodsGenerator from './utils/RelativePeriodsGenerator';
 import PeriodsList from './PeriodsList';
+import styles from './styles/PeriodListItem.style';
 
 export var defaultState = {
-    periodType: 'Weeks'
+    periodType: 'Months'
 };
 
 var RelativePeriods = function (_Component) {
@@ -41,6 +43,11 @@ var RelativePeriods = function (_Component) {
             return generator.generatePeriods();
         };
 
+        _this.selectAll = function () {
+            _this.props.addSelectedPeriods(_this.props.items);
+            _this.props.setOfferedPeriods([]);
+        };
+
         _this.renderOptions = function () {
             return React.createElement(
                 'div',
@@ -50,7 +57,7 @@ var RelativePeriods = function (_Component) {
                     { className: 'form-control period-type' },
                     React.createElement(
                         InputLabel,
-                        { className: 'input-label', htmlFor: 'period-type' },
+                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'period-type' },
                         i18n.t('Period type')
                     ),
                     React.createElement(
@@ -86,7 +93,16 @@ var RelativePeriods = function (_Component) {
                     onPeriodClick: _this.props.onPeriodClick,
                     onDoubleClick: _this.props.onDoubleClick,
                     listClassName: 'periods-list-offered'
-                })
+                }),
+                React.createElement(
+                    'div',
+                    { style: { textAlign: 'center' } },
+                    React.createElement(
+                        Button,
+                        { onClick: _this.selectAll },
+                        i18n.t('Select all')
+                    )
+                )
             );
         };
 
@@ -101,6 +117,7 @@ var RelativePeriods = function (_Component) {
 RelativePeriods.propTypes = {
     items: PropTypes.array.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
+    addSelectedPeriods: PropTypes.func.isRequired,
     onDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
 };

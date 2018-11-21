@@ -68,20 +68,9 @@ export default (function () {
                         isShiftPressed = action.isShiftPressed,
                         isCtrlPressed = action.isCtrlPressed;
 
-
-                    if (action.period.selected) {
-                        var _periods = state.periods.map(function (period) {
-                            return period.id === action.period.id ? _extends({}, period, { selected: false }) : period;
-                        });
-
-                        return _extends({}, state, {
-                            lastClickedIndex: null,
-                            periods: _periods
-                        });
-                    }
-
                     // If control was not pressed, then only select
                     // current period and unselect all others
+
                     if (isCtrlPressed === false && isShiftPressed === false) {
                         return _extends({}, state, {
                             lastClickedIndex: index,
