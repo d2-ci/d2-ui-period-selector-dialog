@@ -86,12 +86,20 @@ var Periods = function (_Component) {
             _this.props.addOfferedPeriods(removedPeriods);
         };
 
-        _this.onDoubleClick = function (selectedPeriod) {
-            var itemToAdd = [selectedPeriod];
+        _this.onOfferedPeriodDoubleClick = function (period) {
+            var itemToAdd = [period];
 
             _this.props.onSelect(itemToAdd);
             _this.props.addSelectedPeriods(itemToAdd);
             _this.props.removeOfferedPeriods(itemToAdd);
+        };
+
+        _this.onSelectedPeriodDoubleClick = function (period) {
+            var itemToAdd = [period];
+
+            _this.props.onDeselect(itemToAdd);
+            _this.props.removeSelectedPeriods(itemToAdd);
+            _this.props.addOfferedPeriods(itemToAdd);
         };
 
         _this.onRemovePeriod = function (removedPeriod) {
@@ -106,15 +114,6 @@ var Periods = function (_Component) {
             _this.props.onDeselect(removedPeriods);
             _this.props.addOfferedPeriods(removedPeriods);
             _this.props.setSelectedPeriods([]);
-        };
-
-        _this.getOfferedPeriods = function () {
-            var selectedIds = _this.props.selectedItems.map(function (item) {
-                return item.id;
-            });
-            return _this.props.offeredPeriods.periods.filter(function (item) {
-                return !selectedIds.includes(item.id);
-            });
         };
 
         _this.renderPeriodTypeButtons = function () {
@@ -148,7 +147,6 @@ var Periods = function (_Component) {
         _this.render = function () {
             var PeriodTypeButtons = _this.renderPeriodTypeButtons();
             var SelectButtons = _this.renderSelectButtons();
-            var unselectedItems = _this.getOfferedPeriods();
 
             return React.createElement(
                 'div',
@@ -162,8 +160,8 @@ var Periods = function (_Component) {
                         { className: 'block options' },
                         React.createElement(OfferedPeriods, {
                             periodType: _this.props.periodType,
-                            items: unselectedItems,
-                            onDoubleClick: _this.onDoubleClick,
+                            items: _this.props.offeredPeriods.periods,
+                            onPeriodDoubleClick: _this.onOfferedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleOfferedPeriod,
                             setOfferedPeriods: _this.props.setOfferedPeriods,
                             addSelectedPeriods: _this.props.addSelectedPeriods,
@@ -181,6 +179,7 @@ var Periods = function (_Component) {
                         React.createElement(SelectedPeriods, {
                             items: _this.props.selectedPeriods.periods,
                             onClearAll: _this.onClearAll,
+                            onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
                             onRemovePeriodClick: _this.onRemovePeriod
                         })

@@ -47,7 +47,13 @@ var RelativePeriods = function (_Component) {
 
         _this.generatePeriods = function (periodType) {
             var generator = _this.periodsGenerator.get(periodType);
-            return generator.generatePeriods();
+            var selectedIds = _this.props.selectedItems.map(function (item) {
+                return item.id;
+            });
+
+            return generator.generatePeriods().filter(function (item) {
+                return !selectedIds.includes(item.id);
+            });
         };
 
         _this.selectAll = function () {
@@ -98,7 +104,7 @@ var RelativePeriods = function (_Component) {
                 React.createElement(PeriodsList, {
                     items: _this.props.items,
                     onPeriodClick: _this.props.onPeriodClick,
-                    onDoubleClick: _this.props.onDoubleClick,
+                    onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     listClassName: 'periods-list-offered'
                 }),
                 React.createElement(
@@ -126,7 +132,7 @@ RelativePeriods.propTypes = {
     selectedItems: PropTypes.array.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
     addSelectedPeriods: PropTypes.func.isRequired,
-    onDoubleClick: PropTypes.func.isRequired,
+    onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
 };
 

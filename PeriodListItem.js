@@ -54,8 +54,8 @@ var PeriodListItem = function (_Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref2 = PeriodListItem.__proto__ || _Object$getPrototypeOf(PeriodListItem)).call.apply(_ref2, [this].concat(args))), _this), _this.state = { isHovering: false }, _this.onPeriodClick = function (event) {
             _this.props.onPeriodClick(_this.props.period, _this.props.index, event.shiftKey, event.metaKey);
-        }, _this.onDoubleClick = function () {
-            _this.props.onDoubleClick(_this.props.period);
+        }, _this.onPeriodDoubleClick = function () {
+            _this.props.onPeriodDoubleClick(_this.props.period);
         }, _this.onRemovePeriodClick = function (event) {
             event.stopPropagation();
             _this.props.onRemovePeriodClick(_this.props.period);
@@ -93,7 +93,7 @@ var PeriodListItem = function (_Component) {
                         onMouseEnter: _this.highlightItem,
                         onMouseLeave: _this.removeHighlight,
                         onClick: _this.onPeriodClick,
-                        onDoubleClick: _this.onDoubleClick,
+                        onDoubleClick: _this.onPeriodDoubleClick,
                         className: className
                     },
                     Icon,
@@ -118,7 +118,7 @@ PeriodListItem.propTypes = {
     period: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
-    onDoubleClick: PropTypes.func.isRequired,
+    onPeriodDoubleClick: PropTypes.func.isRequired,
     onRemovePeriodClick: PropTypes.func.isRequired,
     listClassName: PropTypes.string.isRequired
 };

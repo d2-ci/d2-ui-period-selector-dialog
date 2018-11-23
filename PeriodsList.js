@@ -26,13 +26,13 @@ var PeriodsList = function PeriodsList(props) {
 PeriodsList.propTypes = {
     items: PropTypes.array.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
-    onDoubleClick: PropTypes.func,
+    onPeriodDoubleClick: PropTypes.func,
     onRemovePeriodClick: PropTypes.func,
     listClassName: PropTypes.string.isRequired
 };
 
 PeriodsList.defaultProps = {
-    onDoubleClick: function onDoubleClick() {
+    onPeriodDoubleClick: function onPeriodDoubleClick() {
         return null;
     },
     onRemovePeriodClick: function onRemovePeriodClick() {
