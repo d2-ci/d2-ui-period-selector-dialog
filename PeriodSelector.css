@@ -1,0 +1,163 @@
+.periods-container {
+    user-select: none;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 429px;
+    padding-top: 18px;
+}
+
+button.nav-button {
+    text-transform: none;
+    border: 1px solid #ECEFF1;
+    border-radius: 2px 0px 0px 2px;
+    padding: 5px 13px 3px;
+}
+
+.nav-button.active, .nav-button.active:hover {
+    background-color: #00796B;
+    color: #fff;
+}
+
+.block-offered-periods {
+    flex: 3 unset 190px;
+    border: 1px solid #e8e8e8;
+}
+
+.block-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0px 5px;
+    max-width: 60px;
+}
+
+.block-buttons button {
+    padding: 0px;
+    border-radius: 4px;
+    width: 40px;
+    height: 36px;
+    background-color: white;
+    box-shadow: 0 2px 5px #b1b1b1;
+}
+
+.block-buttons button:nth-child(1) {
+    margin: 0px auto 35px;
+}
+
+.block-buttons button:nth-child(2) {
+    margin: 0px auto;
+}
+
+.block-selected-periods {
+    flex: 2 unset 125px;
+    border: 1px solid #f0e3e3;
+}
+
+.options-area {
+    padding: 5px 10px 0px 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.periods-list-offered, .periods-list-selected {
+    overflow-y: scroll;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.periods-list-offered {
+    height: calc(100% - 91px);
+}
+
+.periods-list-selected {
+    height: calc(100% - 71px);
+}
+
+.period-dimension-item {
+    display: flex;
+    margin: 2px;
+}
+
+.period-offered-label:hover {
+    background-color: #e0e0e0;
+}
+
+.period-selected-label:hover {
+    background-color: #86c4bf;
+}
+
+.period-selected-label, .period-offered-label {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 3px 5px 3px 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.period-selected-label {
+    background-color: #b2dfdb;
+    padding: 3px;
+}
+
+.subtitle-container {
+    border-bottom: 1px solid #E0E0E0;
+    height: 34px;
+    display: flex;
+}
+
+.subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 0px 0px 10px;
+}
+
+.move-all-items-button {
+    text-align: center;
+}
+
+.list-text {
+    padding: 2px;
+    font-size: 14px;
+ }
+
+.unselected-icon, .selected-icon,  .highlighted-icon{
+    background-color: grey;
+    min-height: 6px;
+    min-width: 6px;
+    margin: 0px 5px;
+}
+
+.selected-icon {
+    background-color: #00796B;
+}
+
+.highlighted-icon {
+    background-color: white;
+}
+
+.form-control-period-type { 
+    width: 65%; 
+    padding-right: 10px; 
+}
+
+.form-control-year { 
+    width: 35%; 
+}
+
+.input-label {
+    color: #494949;
+}
+
+.period-li.selected h3 { 
+    color: white; 
+}
+
+#year-select {
+    cursor: pointer;
+    color: #000000;
+}
+
+#year-select-menu {
+    width: 130px;
+}
