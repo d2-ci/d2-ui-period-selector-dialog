@@ -1,0 +1,43 @@
+import _extends from 'babel-runtime/helpers/extends';
+import _objectWithoutProperties from 'babel-runtime/helpers/objectWithoutProperties';
+import React from 'react';
+import PropTypes from 'prop-types';
+import PeriodListItem from './PeriodListItem';
+
+var PeriodsList = function PeriodsList(props) {
+    var items = props.items,
+        remaindingProps = _objectWithoutProperties(props, ['items']);
+
+    var ListItems = items.map(function (period, index) {
+        return React.createElement(PeriodListItem, _extends({
+            className: remaindingProps.className,
+            period: period,
+            index: index,
+            key: period.id
+        }, remaindingProps));
+    });
+
+    return React.createElement(
+        'ul',
+        { className: remaindingProps.className },
+        ListItems
+    );
+};
+
+PeriodsList.propTypes = {
+    items: PropTypes.array.isRequired,
+    onPeriodClick: PropTypes.func.isRequired,
+    onPeriodDoubleClick: PropTypes.func,
+    onRemovePeriodClick: PropTypes.func
+};
+
+PeriodsList.defaultProps = {
+    onPeriodDoubleClick: function onPeriodDoubleClick() {
+        return null;
+    },
+    onRemovePeriodClick: function onRemovePeriodClick() {
+        return null;
+    }
+};
+
+export default PeriodsList;
