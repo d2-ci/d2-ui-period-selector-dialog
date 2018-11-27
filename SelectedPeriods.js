@@ -42,6 +42,7 @@ var SelectedPeriods = function (_React$Component) {
                 React.createElement(PeriodsList, {
                     items: _this.props.items,
                     onPeriodClick: _this.props.onPeriodClick,
+                    onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     onRemovePeriodClick: _this.props.onRemovePeriodClick,
                     listClassName: 'periods-list-selected'
                 }),
@@ -64,6 +65,7 @@ var SelectedPeriods = function (_React$Component) {
 SelectedPeriods.propTypes = {
     items: PropTypes.array.isRequired,
     onClearAll: PropTypes.func.isRequired,
+    onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
     onRemovePeriodClick: PropTypes.func.isRequired
 };

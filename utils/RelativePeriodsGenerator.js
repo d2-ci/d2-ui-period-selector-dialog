@@ -10,9 +10,9 @@ var Generator = function Generator() {
         Days: DaysPeriodType,
         Weeks: WeeksPeriodType,
         Months: MonthsPeriodType,
-        BiMonths: BiMonthsPeriodType,
+        'Bi-months': BiMonthsPeriodType,
         Quarters: QuartersPeriodType,
-        SixMonths: SixMonthsPeriodType,
+        'Six-months': SixMonthsPeriodType,
         'Financial Years': FinancialYearsPeriodType,
         Years: YearsPeriodType
     };
