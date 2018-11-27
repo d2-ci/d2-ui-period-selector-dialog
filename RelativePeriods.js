@@ -27,7 +27,14 @@ var RelativePeriods = function (_Component) {
         var _this = _possibleConstructorReturn(this, (RelativePeriods.__proto__ || _Object$getPrototypeOf(RelativePeriods)).call(this, props));
 
         _this.componentDidMount = function () {
-            _this.props.setOfferedPeriods(_this.generatePeriods(_this.state.periodType));
+            var periods = _this.generatePeriods(_this.state.periodType);
+            var selectedIds = _this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            _this.props.setOfferedPeriods(periods.filter(function (period) {
+                return !selectedIds.includes(period.id);
+            }));
         };
 
         _this.onPeriodTypeChange = function (event) {
@@ -40,7 +47,13 @@ var RelativePeriods = function (_Component) {
 
         _this.generatePeriods = function (periodType) {
             var generator = _this.periodsGenerator.get(periodType);
-            return generator.generatePeriods();
+            var selectedIds = _this.props.selectedItems.map(function (item) {
+                return item.id;
+            });
+
+            return generator.generatePeriods().filter(function (item) {
+                return !selectedIds.includes(item.id);
+            });
         };
 
         _this.selectAll = function () {
@@ -91,7 +104,7 @@ var RelativePeriods = function (_Component) {
                 React.createElement(PeriodsList, {
                     items: _this.props.items,
                     onPeriodClick: _this.props.onPeriodClick,
-                    onDoubleClick: _this.props.onDoubleClick,
+                    onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     listClassName: 'periods-list-offered'
                 }),
                 React.createElement(
@@ -116,9 +129,10 @@ var RelativePeriods = function (_Component) {
 
 RelativePeriods.propTypes = {
     items: PropTypes.array.isRequired,
+    selectedItems: PropTypes.array.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
     addSelectedPeriods: PropTypes.func.isRequired,
-    onDoubleClick: PropTypes.func.isRequired,
+    onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
 };
 

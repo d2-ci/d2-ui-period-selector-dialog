@@ -1,5 +1,6 @@
 import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component, Fragment } from 'react';
@@ -86,12 +87,20 @@ var Periods = function (_Component) {
             _this.props.addOfferedPeriods(removedPeriods);
         };
 
-        _this.onDoubleClick = function (selectedPeriod) {
-            var itemToAdd = [selectedPeriod];
+        _this.onOfferedPeriodDoubleClick = function (period) {
+            var itemToAdd = [period];
 
             _this.props.onSelect(itemToAdd);
             _this.props.addSelectedPeriods(itemToAdd);
             _this.props.removeOfferedPeriods(itemToAdd);
+        };
+
+        _this.onSelectedPeriodDoubleClick = function (period) {
+            var itemToAdd = [period];
+
+            _this.props.onDeselect(itemToAdd);
+            _this.props.removeSelectedPeriods(itemToAdd);
+            _this.props.addOfferedPeriods(itemToAdd);
         };
 
         _this.onRemovePeriod = function (removedPeriod) {
@@ -106,15 +115,6 @@ var Periods = function (_Component) {
             _this.props.onDeselect(removedPeriods);
             _this.props.addOfferedPeriods(removedPeriods);
             _this.props.setSelectedPeriods([]);
-        };
-
-        _this.getOfferedPeriods = function () {
-            var selectedIds = _this.props.selectedItems.map(function (item) {
-                return item.id;
-            });
-            return _this.props.offeredPeriods.periods.filter(function (item) {
-                return !selectedIds.includes(item.id);
-            });
         };
 
         _this.renderPeriodTypeButtons = function () {
@@ -148,7 +148,6 @@ var Periods = function (_Component) {
         _this.render = function () {
             var PeriodTypeButtons = _this.renderPeriodTypeButtons();
             var SelectButtons = _this.renderSelectButtons();
-            var unselectedItems = _this.getOfferedPeriods();
 
             return React.createElement(
                 'div',
@@ -162,11 +161,12 @@ var Periods = function (_Component) {
                         { className: 'block options' },
                         React.createElement(OfferedPeriods, {
                             periodType: _this.props.periodType,
-                            items: unselectedItems,
-                            onDoubleClick: _this.onDoubleClick,
+                            items: _this.props.offeredPeriods.periods,
+                            onPeriodDoubleClick: _this.onOfferedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleOfferedPeriod,
                             setOfferedPeriods: _this.props.setOfferedPeriods,
-                            addSelectedPeriods: _this.props.addSelectedPeriods
+                            addSelectedPeriods: _this.props.addSelectedPeriods,
+                            selectedItems: _this.props.selectedItems
                         })
                     ),
                     React.createElement(
@@ -180,6 +180,7 @@ var Periods = function (_Component) {
                         React.createElement(SelectedPeriods, {
                             items: _this.props.selectedPeriods.periods,
                             onClearAll: _this.onClearAll,
+                            onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
                             onRemovePeriodClick: _this.onRemovePeriod
                         })
@@ -191,6 +192,30 @@ var Periods = function (_Component) {
         _this.props.setSelectedPeriods(_this.props.selectedItems);
         return _this;
     }
+
+    _createClass(Periods, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            var prevItems = prevProps.selectedItems.map(function (period) {
+                return period.id;
+            });
+            var currentItems = this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            if (prevItems.length !== currentItems.length) {
+                this.props.setSelectedPeriods(this.props.selectedItems);
+            } else {
+                for (var i = 0; i < prevItems.length; ++i) {
+                    if (prevItems[i] !== currentItems[i]) {
+                        this.props.setSelectedPeriods(this.props.selectedItems);
+
+                        break;
+                    }
+                }
+            }
+        }
+    }]);
 
     return Periods;
 }(Component);

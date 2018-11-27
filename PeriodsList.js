@@ -8,7 +8,7 @@ var PeriodsList = function PeriodsList(props) {
     var items = props.items,
         remaindingProps = _objectWithoutProperties(props, ['items']);
 
-    var ListItems = props.items.map(function (period, index) {
+    var ListItems = items.map(function (period, index) {
         return React.createElement(PeriodListItem, _extends({
             period: period,
             index: index,
@@ -19,22 +19,20 @@ var PeriodsList = function PeriodsList(props) {
     return React.createElement(
         'ul',
         { className: remaindingProps.listClassName },
-        ' ',
-        ListItems,
-        ' '
+        ListItems
     );
 };
 
 PeriodsList.propTypes = {
     items: PropTypes.array.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
-    onDoubleClick: PropTypes.func,
+    onPeriodDoubleClick: PropTypes.func,
     onRemovePeriodClick: PropTypes.func,
     listClassName: PropTypes.string.isRequired
 };
 
 PeriodsList.defaultProps = {
-    onDoubleClick: function onDoubleClick() {
+    onPeriodDoubleClick: function onPeriodDoubleClick() {
         return null;
     },
     onRemovePeriodClick: function onRemovePeriodClick() {
