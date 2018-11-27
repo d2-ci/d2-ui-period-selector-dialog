@@ -1,5 +1,6 @@
 import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component, Fragment } from 'react';
@@ -191,6 +192,30 @@ var Periods = function (_Component) {
         _this.props.setSelectedPeriods(_this.props.selectedItems);
         return _this;
     }
+
+    _createClass(Periods, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            var prevItems = prevProps.selectedItems.map(function (period) {
+                return period.id;
+            });
+            var currentItems = this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            if (prevItems.length !== currentItems.length) {
+                this.props.setSelectedPeriods(this.props.selectedItems);
+            } else {
+                for (var i = 0; i < prevItems.length; ++i) {
+                    if (prevItems[i] !== currentItems[i]) {
+                        this.props.setSelectedPeriods(this.props.selectedItems);
+
+                        break;
+                    }
+                }
+            }
+        }
+    }]);
 
     return Periods;
 }(Component);
