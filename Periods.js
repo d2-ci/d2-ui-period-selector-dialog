@@ -117,10 +117,6 @@ var Periods = function (_Component) {
             _this.props.setSelectedPeriods([]);
         };
 
-        _this.onReorder = function (periods) {
-            _this.props.setSelectedPeriods(periods);
-        };
-
         _this.renderPeriodTypeButtons = function () {
             return React.createElement(
                 Fragment,
@@ -187,7 +183,7 @@ var Periods = function (_Component) {
                             onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
                             onRemovePeriodClick: _this.onRemovePeriod,
-                            onReorder: _this.onReorder
+                            onReorder: _this.props.setSelectedPeriods
                         })
                     )
                 )

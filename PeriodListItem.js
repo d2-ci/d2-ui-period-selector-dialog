@@ -74,14 +74,6 @@ var PeriodListItem = function (_Component) {
         }, _this.renderRemoveButton = function () {
             return _this.isOfferedList() ? null : React.createElement(RemoveItemButton, { isHighlighted: _this.props.period.selected, action: _this.onRemovePeriodClick });
         }, _this.render = function () {
-            var className = _this.isOfferedList() ? 'period-offered-label' : 'period-selected-label';
-            var Icon = _this.renderIcon();
-            var RemoveButton = _this.renderRemoveButton();
-
-            if (typeof _this.props.index == 'undefined') {
-                console.log('PLI index', _this.props.index, _this.props.period.name, _this.props.listClassName);
-            }
-
             return React.createElement(
                 'div',
                 {
@@ -92,9 +84,9 @@ var PeriodListItem = function (_Component) {
                     onMouseLeave: _this.removeHighlight,
                     onClick: _this.onPeriodClick,
                     onDoubleClick: _this.onPeriodDoubleClick,
-                    className: className
+                    className: _this.isOfferedList() ? 'period-offered-label' : 'period-selected-label'
                 },
-                Icon,
+                _this.renderIcon(),
                 React.createElement(
                     'span',
                     {
@@ -103,7 +95,7 @@ var PeriodListItem = function (_Component) {
                     },
                     _this.props.period.name
                 ),
-                RemoveButton
+                _this.renderRemoveButton()
             );
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }

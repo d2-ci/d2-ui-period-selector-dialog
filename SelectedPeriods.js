@@ -22,9 +22,7 @@ var SelectedPeriods = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SelectedPeriods.__proto__ || _Object$getPrototypeOf(SelectedPeriods)).call.apply(_ref, [this].concat(args))), _this), _this.onReorder = function (periods) {
-            _this.props.onReorder(periods);
-        }, _this.clearPeriods = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SelectedPeriods.__proto__ || _Object$getPrototypeOf(SelectedPeriods)).call.apply(_ref, [this].concat(args))), _this), _this.clearPeriods = function () {
             _this.props.onClearAll(_this.props.items);
         }, _this.render = function () {
             return React.createElement(
@@ -46,7 +44,7 @@ var SelectedPeriods = function (_React$Component) {
                     onPeriodClick: _this.props.onPeriodClick,
                     onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     onRemovePeriodClick: _this.props.onRemovePeriodClick,
-                    onReorder: _this.onReorder,
+                    onReorder: _this.props.onReorder,
                     listClassName: 'periods-list-selected',
                     sortable: true
                 }),
