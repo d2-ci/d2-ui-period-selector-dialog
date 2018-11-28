@@ -119,7 +119,7 @@ var Periods = function (_Component) {
 
         _this.renderPeriodTypeButtons = function () {
             return React.createElement(
-                Fragment,
+                'div',
                 null,
                 React.createElement(PeriodTypeButton, {
                     periodType: PeriodTypes.RELATIVE,
