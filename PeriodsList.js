@@ -116,15 +116,9 @@ PeriodsList.propTypes = {
 };
 
 PeriodsList.defaultProps = {
-    onPeriodDoubleClick: function onPeriodDoubleClick() {
-        return null;
-    },
-    onRemovePeriodClick: function onRemovePeriodClick() {
-        return null;
-    },
-    onReorder: function onReorder() {
-        return null;
-    }
+    onPeriodDoubleClick: Function.prototype,
+    onRemovePeriodClick: Function.prototype,
+    onReorder: Function.prototype
 };
 
 export default PeriodsList;

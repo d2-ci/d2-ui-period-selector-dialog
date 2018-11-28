@@ -20,7 +20,7 @@ var SelectedIcon = function SelectedIcon() {
     return React.createElement('div', { className: 'selected-icon' });
 };
 
-var RemoveItemButton = function RemoveItemButton(_ref) {
+export var RemoveItemButton = function RemoveItemButton(_ref) {
     var action = _ref.action,
         isHighlighted = _ref.isHighlighted;
     return React.createElement(
