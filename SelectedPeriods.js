@@ -44,7 +44,9 @@ var SelectedPeriods = function (_React$Component) {
                     onPeriodClick: _this.props.onPeriodClick,
                     onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     onRemovePeriodClick: _this.props.onRemovePeriodClick,
-                    listClassName: 'periods-list-selected'
+                    onReorder: _this.props.onReorder,
+                    listClassName: 'periods-list-selected',
+                    sortable: true
                 }),
                 React.createElement(
                     'div',
@@ -67,7 +69,8 @@ SelectedPeriods.propTypes = {
     onClearAll: PropTypes.func.isRequired,
     onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
-    onRemovePeriodClick: PropTypes.func.isRequired
+    onRemovePeriodClick: PropTypes.func.isRequired,
+    onReorder: PropTypes.func.isRequired
 };
 
 export default SelectedPeriods;

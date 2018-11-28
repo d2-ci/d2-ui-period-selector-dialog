@@ -182,7 +182,8 @@ var Periods = function (_Component) {
                             onClearAll: _this.onClearAll,
                             onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
-                            onRemovePeriodClick: _this.onRemovePeriod
+                            onRemovePeriodClick: _this.onRemovePeriod,
+                            onReorder: _this.props.setSelectedPeriods
                         })
                     )
                 )
