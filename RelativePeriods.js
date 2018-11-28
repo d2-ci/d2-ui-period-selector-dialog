@@ -58,8 +58,8 @@ var RelativePeriods = function (_Component) {
         };
 
         _this.selectAll = function () {
-            _this.props.addSelectedPeriods(_this.props.items);
-            _this.setOfferedPeriods([]);
+            _this.props.onSelect(_this.props.items);
+            _this.props.setOfferedPeriods([]);
         };
 
         _this.renderOptions = function () {
@@ -133,7 +133,7 @@ RelativePeriods.propTypes = {
     selectedItems: PropTypes.array.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
     setOfferedPeriodIds: PropTypes.func.isRequired,
-    addSelectedPeriods: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
     onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
 };

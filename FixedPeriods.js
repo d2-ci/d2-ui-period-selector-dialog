@@ -102,8 +102,8 @@ var FixedPeriods = function (_Component) {
         };
 
         _this.selectAll = function () {
-            _this.props.addSelectedPeriods(_this.props.items);
-            _this.setOfferedPeriods([]);
+            _this.props.onSelect(_this.props.items);
+            _this.props.setOfferedPeriods([]);
         };
 
         _this.closeYearSelect = function () {
@@ -258,7 +258,7 @@ FixedPeriods.propTypes = {
     onPeriodClick: PropTypes.func.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
     setOfferedPeriodIds: PropTypes.func.isRequired,
-    addSelectedPeriods: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired
 };
 
 FixedPeriods.contextTypes = {

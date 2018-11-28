@@ -15,6 +15,7 @@ var PeriodSelector = function PeriodSelector(props) {
 PeriodSelector.propTypes = {
     onSelect: PropTypes.func,
     onDeselect: PropTypes.func,
+    onReorder: PropTypes.func,
     selectedItems: PropTypes.arrayOf(PropTypes.object)
 };
 
@@ -23,6 +24,9 @@ PeriodSelector.defaultProps = {
         return null;
     },
     onDeselect: function onDeselect() {
+        return null;
+    },
+    onReorder: function onReorder() {
         return null;
     },
     selectedItems: []

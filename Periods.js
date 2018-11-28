@@ -181,7 +181,8 @@ var Periods = function (_Component) {
                             setOfferedPeriods: _this.props.setOfferedPeriods,
                             setOfferedPeriodIds: _this.setOfferedPeriodIds,
                             addSelectedPeriods: _this.props.addSelectedPeriods,
-                            selectedItems: _this.props.selectedItems
+                            selectedItems: _this.props.selectedItems,
+                            onSelect: _this.props.onSelect
                         })
                     ),
                     React.createElement(
@@ -197,7 +198,7 @@ var Periods = function (_Component) {
                             onClearAll: _this.onClearAll,
                             onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
-                            onReorder: _this.props.setSelectedPeriods,
+                            onReorder: _this.props.onReorder,
                             onRemovePeriodClick: _this.onSelectedPeriodRemove
                         })
                     )
@@ -243,6 +244,7 @@ var Periods = function (_Component) {
 Periods.propTypes = {
     onSelect: PropTypes.func.isRequired,
     onDeselect: PropTypes.func.isRequired,
+    onReorder: PropTypes.func.isRequired,
     selectedItems: PropTypes.array.isRequired,
     periodType: PropTypes.string.isRequired,
     offeredPeriods: PropTypes.object.isRequired,
