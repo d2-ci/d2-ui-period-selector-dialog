@@ -77,6 +77,7 @@ var PeriodsList = function (_Component) {
 
             if (sortable) {
                 return React.createElement(SortableList, _extends({
+                    helperClass: 'sortableHelper',
                     distance: 3,
                     transitionDuration: 200,
                     onSortEnd: this.onSortEnd,
