@@ -16,15 +16,12 @@ var SortableItem = SortableElement(function (_ref) {
         listClassName = _ref.listClassName,
         handlerProps = _objectWithoutProperties(_ref, ['period', 'idx', 'listClassName']);
 
-    return React.createElement(
-        'li',
-        { key: period.id, className: 'period-dimension-item' },
-        React.createElement(PeriodListItem, _extends({
-            period: period,
-            index: idx,
-            listClassName: listClassName
-        }, handlerProps))
-    );
+    return React.createElement(PeriodListItem, _extends({
+        key: period.id,
+        period: period,
+        index: idx,
+        listClassName: listClassName
+    }, handlerProps));
 });
 
 var SortableList = SortableContainer(function (_ref2) {
@@ -89,19 +86,12 @@ var PeriodsList = function (_Component) {
             }
 
             var ListItems = items.map(function (period, index) {
-                return React.createElement(
-                    'li',
-                    {
-                        key: period.id,
-                        className: 'period-dimension-item'
-                    },
-                    React.createElement(PeriodListItem, _extends({
-                        period: period,
-                        index: index,
-                        key: period.id,
-                        listClassName: listClassName
-                    }, handlerProps))
-                );
+                return React.createElement(PeriodListItem, _extends({
+                    key: period.id,
+                    period: period,
+                    index: index,
+                    listClassName: listClassName
+                }, handlerProps));
             });
 
             return React.createElement(
@@ -130,6 +120,9 @@ PeriodsList.defaultProps = {
         return null;
     },
     onRemovePeriodClick: function onRemovePeriodClick() {
+        return null;
+    },
+    onReorder: function onReorder() {
         return null;
     }
 };

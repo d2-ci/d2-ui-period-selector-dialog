@@ -75,27 +75,31 @@ var PeriodListItem = function (_Component) {
             return _this.isOfferedList() ? null : React.createElement(RemoveItemButton, { isHighlighted: _this.props.period.selected, action: _this.onRemovePeriodClick });
         }, _this.render = function () {
             return React.createElement(
-                'div',
-                {
-                    role: 'button',
-                    tabIndex: 0,
-                    style: _this.props.period.selected ? styles.highlightedContainer : {},
-                    onMouseEnter: _this.highlightItem,
-                    onMouseLeave: _this.removeHighlight,
-                    onClick: _this.onPeriodClick,
-                    onDoubleClick: _this.onPeriodDoubleClick,
-                    className: _this.isOfferedList() ? 'period-offered-label' : 'period-selected-label'
-                },
-                _this.renderIcon(),
+                'li',
+                { className: 'period-dimension-item' },
                 React.createElement(
-                    'span',
+                    'div',
                     {
-                        style: _this.props.period.selected ? styles.higlightedText : {},
-                        className: 'list-text'
+                        role: 'button',
+                        tabIndex: 0,
+                        style: _this.props.period.selected ? styles.highlightedContainer : {},
+                        onMouseEnter: _this.highlightItem,
+                        onMouseLeave: _this.removeHighlight,
+                        onClick: _this.onPeriodClick,
+                        onDoubleClick: _this.onPeriodDoubleClick,
+                        className: _this.isOfferedList() ? 'period-offered-label' : 'period-selected-label'
                     },
-                    _this.props.period.name
-                ),
-                _this.renderRemoveButton()
+                    _this.renderIcon(),
+                    React.createElement(
+                        'span',
+                        {
+                            style: _this.props.period.selected ? styles.higlightedText : {},
+                            className: 'list-text'
+                        },
+                        _this.props.period.name
+                    ),
+                    _this.renderRemoveButton()
+                )
             );
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
