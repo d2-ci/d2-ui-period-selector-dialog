@@ -37,13 +37,8 @@ var FixedPeriods = function (_Component) {
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType, _this.state.year);
-            var selectedIds = _this.props.selectedItems.map(function (period) {
-                return period.id;
-            });
 
-            _this.props.setOfferedPeriods(periods.filter(function (period) {
-                return !selectedIds.includes(period.id);
-            }));
+            _this.setOfferedPeriods(periods);
         };
 
         _this.onPeriodTypeChange = function (event) {
@@ -52,7 +47,7 @@ var FixedPeriods = function (_Component) {
             });
 
             if (_this.state.year) {
-                _this.props.setOfferedPeriods(_this.generatePeriods(event.target.value, _this.state.year));
+                _this.setOfferedPeriods(_this.generatePeriods(event.target.value, _this.state.year));
             }
         };
 
@@ -63,7 +58,7 @@ var FixedPeriods = function (_Component) {
             });
 
             if (_this.state.periodType) {
-                _this.props.setOfferedPeriods(_this.generatePeriods(_this.state.periodType, event.target.value));
+                _this.setOfferedPeriods(_this.generatePeriods(_this.state.periodType, event.target.value));
             }
         };
 
@@ -85,23 +80,29 @@ var FixedPeriods = function (_Component) {
             return years;
         };
 
+        _this.setOfferedPeriods = function (periods) {
+            var selectedIds = _this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            _this.props.setOfferedPeriodIds(periods);
+            _this.props.setOfferedPeriods(periods.filter(function (period) {
+                return !selectedIds.includes(period.id);
+            }));
+        };
+
         _this.generatePeriods = function (periodType, year) {
             var generator = _this.periodsGenerator.get(periodType);
-            var selectedIds = _this.props.selectedItems.map(function (item) {
-                return item.id;
-            });
 
             return generator.generatePeriods({
                 offset: year - new Date().getFullYear(),
                 filterFuturePeriods: false,
                 reversePeriods: false
-            }).filter(function (period) {
-                return !selectedIds.includes(period.id);
             });
         };
 
         _this.selectAll = function () {
-            _this.props.addSelectedPeriods(_this.props.items);
+            _this.props.onSelect(_this.props.items);
             _this.props.setOfferedPeriods([]);
         };
 
@@ -256,7 +257,8 @@ FixedPeriods.propTypes = {
     onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
-    addSelectedPeriods: PropTypes.func.isRequired
+    setOfferedPeriodIds: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
 };
 
 FixedPeriods.contextTypes = {

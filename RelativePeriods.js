@@ -28,13 +28,8 @@ var RelativePeriods = function (_Component) {
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType);
-            var selectedIds = _this.props.selectedItems.map(function (period) {
-                return period.id;
-            });
 
-            _this.props.setOfferedPeriods(periods.filter(function (period) {
-                return !selectedIds.includes(period.id);
-            }));
+            _this.setOfferedPeriods(periods);
         };
 
         _this.onPeriodTypeChange = function (event) {
@@ -42,22 +37,28 @@ var RelativePeriods = function (_Component) {
                 periodType: event.target.value
             });
 
-            _this.props.setOfferedPeriods(_this.generatePeriods(event.target.value));
+            _this.setOfferedPeriods(_this.generatePeriods(event.target.value));
+        };
+
+        _this.setOfferedPeriods = function (periods) {
+            var selectedIds = _this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            _this.props.setOfferedPeriodIds(periods);
+            _this.props.setOfferedPeriods(periods.filter(function (period) {
+                return !selectedIds.includes(period.id);
+            }));
         };
 
         _this.generatePeriods = function (periodType) {
             var generator = _this.periodsGenerator.get(periodType);
-            var selectedIds = _this.props.selectedItems.map(function (item) {
-                return item.id;
-            });
 
-            return generator.generatePeriods().filter(function (item) {
-                return !selectedIds.includes(item.id);
-            });
+            return generator.generatePeriods();
         };
 
         _this.selectAll = function () {
-            _this.props.addSelectedPeriods(_this.props.items);
+            _this.props.onSelect(_this.props.items);
             _this.props.setOfferedPeriods([]);
         };
 
@@ -131,7 +132,8 @@ RelativePeriods.propTypes = {
     items: PropTypes.array.isRequired,
     selectedItems: PropTypes.array.isRequired,
     setOfferedPeriods: PropTypes.func.isRequired,
-    addSelectedPeriods: PropTypes.func.isRequired,
+    setOfferedPeriodIds: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
     onPeriodDoubleClick: PropTypes.func.isRequired,
     onPeriodClick: PropTypes.func.isRequired
 };

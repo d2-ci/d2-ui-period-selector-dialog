@@ -84,7 +84,7 @@ var Periods = function (_Component) {
 
             _this.props.onDeselect(removedPeriods);
             _this.props.removeSelectedPeriods(removedPeriods);
-            _this.props.addOfferedPeriods(removedPeriods);
+            _this.addOfferedPeriods(removedPeriods);
         };
 
         _this.onOfferedPeriodDoubleClick = function (period) {
@@ -100,21 +100,35 @@ var Periods = function (_Component) {
 
             _this.props.onDeselect(itemToAdd);
             _this.props.removeSelectedPeriods(itemToAdd);
-            _this.props.addOfferedPeriods(itemToAdd);
+            _this.addOfferedPeriods(itemToAdd);
         };
 
-        _this.onRemovePeriod = function (removedPeriod) {
+        _this.onSelectedPeriodRemove = function (removedPeriod) {
             var itemToRemove = [removedPeriod];
 
             _this.props.onDeselect(itemToRemove);
             _this.props.removeSelectedPeriods(itemToRemove);
-            _this.props.addOfferedPeriods(itemToRemove);
+            _this.addOfferedPeriods(itemToRemove);
         };
 
         _this.onClearAll = function (removedPeriods) {
             _this.props.onDeselect(removedPeriods);
-            _this.props.addOfferedPeriods(removedPeriods);
+            _this.addOfferedPeriods(removedPeriods);
             _this.props.setSelectedPeriods([]);
+        };
+
+        _this.setOfferedPeriodIds = function (periods) {
+            _this.setState({
+                offeredPeriodIds: periods.map(function (period) {
+                    return period.id;
+                })
+            });
+        };
+
+        _this.addOfferedPeriods = function (periods) {
+            _this.props.addOfferedPeriods(periods.filter(function (period) {
+                return _this.state.offeredPeriodIds.includes(period.id);
+            }));
         };
 
         _this.renderPeriodTypeButtons = function () {
@@ -165,8 +179,10 @@ var Periods = function (_Component) {
                             onPeriodDoubleClick: _this.onOfferedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleOfferedPeriod,
                             setOfferedPeriods: _this.props.setOfferedPeriods,
+                            setOfferedPeriodIds: _this.setOfferedPeriodIds,
                             addSelectedPeriods: _this.props.addSelectedPeriods,
-                            selectedItems: _this.props.selectedItems
+                            selectedItems: _this.props.selectedItems,
+                            onSelect: _this.props.onSelect
                         })
                     ),
                     React.createElement(
@@ -182,8 +198,8 @@ var Periods = function (_Component) {
                             onClearAll: _this.onClearAll,
                             onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
                             onPeriodClick: _this.props.toggleSelectedPeriod,
-                            onRemovePeriodClick: _this.onRemovePeriod,
-                            onReorder: _this.props.setSelectedPeriods
+                            onReorder: _this.props.onReorder,
+                            onRemovePeriodClick: _this.onSelectedPeriodRemove
                         })
                     )
                 )
@@ -191,6 +207,10 @@ var Periods = function (_Component) {
         };
 
         _this.props.setSelectedPeriods(_this.props.selectedItems);
+
+        _this.state = {
+            offeredPeriodIds: []
+        };
         return _this;
     }
 
@@ -224,6 +244,7 @@ var Periods = function (_Component) {
 Periods.propTypes = {
     onSelect: PropTypes.func.isRequired,
     onDeselect: PropTypes.func.isRequired,
+    onReorder: PropTypes.func.isRequired,
     selectedItems: PropTypes.array.isRequired,
     periodType: PropTypes.string.isRequired,
     offeredPeriods: PropTypes.object.isRequired,
