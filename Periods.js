@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import isEqual from 'lodash/isEqual';
 import PeriodTypeButton from './PeriodTypeButton';
 import SelectedPeriods from './SelectedPeriods';
 import { OfferedPeriods } from './OfferedPeriods';
@@ -224,16 +225,8 @@ var Periods = function (_Component) {
                 return period.id;
             });
 
-            if (prevItems.length !== currentItems.length) {
+            if (!isEqual(prevItems, currentItems)) {
                 this.props.setSelectedPeriods(this.props.selectedItems);
-            } else {
-                for (var i = 0; i < prevItems.length; ++i) {
-                    if (prevItems[i] !== currentItems[i]) {
-                        this.props.setSelectedPeriods(this.props.selectedItems);
-
-                        break;
-                    }
-                }
             }
         }
     }]);
