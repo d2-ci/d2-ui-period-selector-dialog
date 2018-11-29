@@ -1,6 +1,7 @@
 import _toConsumableArray from 'babel-runtime/helpers/toConsumableArray';
 import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component } from 'react';
@@ -17,6 +18,7 @@ import ArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import FixedPeriodsGenerator from './utils/FixedPeriodsGenerator';
 import PeriodsList from './PeriodsList';
 import styles from './styles/PeriodListItem.style';
+import { arrayEquals } from './utils';
 
 export var defaultState = {
     periodType: 'Monthly',
@@ -247,6 +249,22 @@ var FixedPeriods = function (_Component) {
         _this.state = defaultState;
         return _this;
     }
+
+    _createClass(FixedPeriods, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            var prevItems = prevProps.selectedItems.map(function (period) {
+                return period.id;
+            });
+            var currentItems = this.props.selectedItems.map(function (period) {
+                return period.id;
+            });
+
+            if (!arrayEquals(prevItems, currentItems)) {
+                this.setOfferedPeriods(this.generatePeriods(this.state.periodType, this.state.year));
+            }
+        }
+    }]);
 
     return FixedPeriods;
 }(Component);

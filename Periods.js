@@ -18,6 +18,7 @@ import styles from './styles/PeriodListItem.style';
 import './PeriodSelector.css';
 
 import { setPeriodType, addOfferedPeriods, setOfferedPeriods, setSelectedPeriods, removeOfferedPeriods, toggleOfferedPeriod, addSelectedPeriods, removeSelectedPeriods, toggleSelectedPeriod } from './actions';
+import { arrayEquals } from './utils';
 
 var SelectButton = function SelectButton(_ref) {
     var action = _ref.action;
@@ -224,16 +225,8 @@ var Periods = function (_Component) {
                 return period.id;
             });
 
-            if (prevItems.length !== currentItems.length) {
+            if (!arrayEquals(prevItems, currentItems)) {
                 this.props.setSelectedPeriods(this.props.selectedItems);
-            } else {
-                for (var i = 0; i < prevItems.length; ++i) {
-                    if (prevItems[i] !== currentItems[i]) {
-                        this.props.setSelectedPeriods(this.props.selectedItems);
-
-                        break;
-                    }
-                }
             }
         }
     }]);
