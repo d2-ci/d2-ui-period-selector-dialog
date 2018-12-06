@@ -1,34 +1,5 @@
 import _Object$keys from 'babel-runtime/core-js/object/keys';
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-
-var Generator = function Generator() {
-    var _this = this;
-
-    _classCallCheck(this, Generator);
-
-    this.options = {
-        Days: DaysPeriodType,
-        Weeks: WeeksPeriodType,
-        Months: MonthsPeriodType,
-        'Bi-months': BiMonthsPeriodType,
-        Quarters: QuartersPeriodType,
-        'Six-months': SixMonthsPeriodType,
-        'Financial Years': FinancialYearsPeriodType,
-        Years: YearsPeriodType
-    };
-
-    this.get = function (key) {
-        return _this.options[key];
-    };
-
-    this.getOptions = function () {
-        return _Object$keys(_this.options);
-    };
-};
-
-export default Generator;
-
-
 var DaysPeriodType = {
     generatePeriods: function generatePeriods() {
         return [{ id: 'TODAY', name: 'Today' }, { id: 'YESTERDAY', name: 'Yesterday' }, { id: 'LAST_3_DAYS', name: 'Last 3 days' }, { id: 'LAST_7_DAYS', name: 'Last 7 days' }, { id: 'LAST_14_DAYS', name: 'Last 14 days' }];
@@ -76,3 +47,30 @@ var YearsPeriodType = {
         return [{ id: 'THIS_YEAR', name: 'This year' }, { id: 'LAST_YEAR', name: 'Last year' }, { id: 'LAST_5_YEARS', name: 'Last 5 years' }];
     }
 };
+
+var Generator = function Generator() {
+    var _this = this;
+
+    _classCallCheck(this, Generator);
+
+    this.options = {
+        Days: DaysPeriodType,
+        Weeks: WeeksPeriodType,
+        Months: MonthsPeriodType,
+        'Bi-months': BiMonthsPeriodType,
+        Quarters: QuartersPeriodType,
+        'Six-months': SixMonthsPeriodType,
+        'Financial Years': FinancialYearsPeriodType,
+        Years: YearsPeriodType
+    };
+
+    this.get = function (key) {
+        return _this.options[key];
+    };
+
+    this.getOptions = function () {
+        return _Object$keys(_this.options);
+    };
+};
+
+export default Generator;
