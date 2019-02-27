@@ -46,6 +46,6 @@
     "jest": "^23.1.0",
     "mkdirp": "^0.5.1"
   },
-  "version": "5.2.4",
+  "version": "5.2.5",
   "private": false
 }
