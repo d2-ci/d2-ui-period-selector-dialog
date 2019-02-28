@@ -1,34 +1,61 @@
-import _objectWithoutProperties from 'babel-runtime/helpers/objectWithoutProperties';
-import React from 'react';
-import PropTypes from 'prop-types';
-import RelativePeriods from './RelativePeriods';
-import FixedPeriods from './FixedPeriods';
-import PeriodTypes from './PeriodTypes';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.OfferedPeriods = undefined;
+
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _RelativePeriods = require('./RelativePeriods');
+
+var _RelativePeriods2 = _interopRequireDefault(_RelativePeriods);
+
+var _FixedPeriods = require('./FixedPeriods');
+
+var _FixedPeriods2 = _interopRequireDefault(_FixedPeriods);
+
+var _PeriodTypes = require('./PeriodTypes');
+
+var _PeriodTypes2 = _interopRequireDefault(_PeriodTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OfferedPeriods = function OfferedPeriods(props) {
     var periodType = props.periodType,
-        remaindingProps = _objectWithoutProperties(props, ['periodType']);
+        remaindingProps = (0, _objectWithoutProperties3.default)(props, ['periodType']);
 
-    var relativePeriods = React.createElement(RelativePeriods, remaindingProps);
-    var fixedPeriods = React.createElement(FixedPeriods, remaindingProps);
+
+    var relativePeriods = _react2.default.createElement(_RelativePeriods2.default, remaindingProps);
+    var fixedPeriods = _react2.default.createElement(_FixedPeriods2.default, remaindingProps);
 
     switch (periodType) {
-        case PeriodTypes.FIXED:
+        case _PeriodTypes2.default.FIXED:
             return fixedPeriods;
-        case PeriodTypes.RELATIVE:
+        case _PeriodTypes2.default.RELATIVE:
             return relativePeriods;
         default:
             return relativePeriods;
     }
 };
 
-export { OfferedPeriods };
+exports.OfferedPeriods = OfferedPeriods;
 OfferedPeriods.propTypes = {
-    periodType: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired,
-    onPeriodDoubleClick: PropTypes.func.isRequired,
-    onPeriodClick: PropTypes.func.isRequired,
-    setOfferedPeriods: PropTypes.func.isRequired
+    periodType: _propTypes2.default.string.isRequired,
+    items: _propTypes2.default.array.isRequired,
+    onPeriodDoubleClick: _propTypes2.default.func.isRequired,
+    onPeriodClick: _propTypes2.default.func.isRequired,
+    setOfferedPeriods: _propTypes2.default.func.isRequired
 };
 
-export default OfferedPeriods;
+exports.default = OfferedPeriods;

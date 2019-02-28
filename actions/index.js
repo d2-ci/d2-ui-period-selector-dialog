@@ -1,38 +1,49 @@
-import actionTypes from './actionTypes';
+'use strict';
 
-export var setPeriodType = function setPeriodType(periodType) {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.toggleSelectedPeriod = exports.removeSelectedPeriods = exports.setSelectedPeriods = exports.addSelectedPeriods = exports.toggleOfferedPeriod = exports.removeOfferedPeriods = exports.setOfferedPeriods = exports.addOfferedPeriods = exports.setPeriodType = undefined;
+
+var _actionTypes = require('./actionTypes');
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var setPeriodType = exports.setPeriodType = function setPeriodType(periodType) {
     return {
-        type: actionTypes.SET_PERIOD_TYPE,
+        type: _actionTypes2.default.SET_PERIOD_TYPE,
         payload: periodType
     };
 };
 
-export var addOfferedPeriods = function addOfferedPeriods(periods) {
+var addOfferedPeriods = exports.addOfferedPeriods = function addOfferedPeriods(periods) {
     return {
-        type: actionTypes.ADD_OFFERED_PERIODS,
+        type: _actionTypes2.default.ADD_OFFERED_PERIODS,
         periods: periods
     };
 };
 
-export var setOfferedPeriods = function setOfferedPeriods(periods) {
+var setOfferedPeriods = exports.setOfferedPeriods = function setOfferedPeriods(periods) {
     return {
-        type: actionTypes.SET_OFFERED_PERIODS,
+        type: _actionTypes2.default.SET_OFFERED_PERIODS,
         periods: periods
     };
 };
 
-export var removeOfferedPeriods = function removeOfferedPeriods(periodsToRemove) {
+var removeOfferedPeriods = exports.removeOfferedPeriods = function removeOfferedPeriods(periodsToRemove) {
     return {
-        type: actionTypes.REMOVE_OFFERED_PERIODS,
+        type: _actionTypes2.default.REMOVE_OFFERED_PERIODS,
         periodsToRemove: periodsToRemove
     };
 };
 
-export var toggleOfferedPeriod = function toggleOfferedPeriod(period, index) {
+var toggleOfferedPeriod = exports.toggleOfferedPeriod = function toggleOfferedPeriod(period, index) {
     var isShiftPressed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
     var isCtrlPressed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     return {
-        type: actionTypes.TOGGLE_OFFERED_PERIOD,
+        type: _actionTypes2.default.TOGGLE_OFFERED_PERIOD,
         period: period,
         index: index,
         isShiftPressed: isShiftPressed,
@@ -40,32 +51,32 @@ export var toggleOfferedPeriod = function toggleOfferedPeriod(period, index) {
     };
 };
 
-export var addSelectedPeriods = function addSelectedPeriods(periods) {
+var addSelectedPeriods = exports.addSelectedPeriods = function addSelectedPeriods(periods) {
     return {
-        type: actionTypes.ADD_SELECTED_PERIODS,
+        type: _actionTypes2.default.ADD_SELECTED_PERIODS,
         periods: periods
     };
 };
 
-export var setSelectedPeriods = function setSelectedPeriods(periods) {
+var setSelectedPeriods = exports.setSelectedPeriods = function setSelectedPeriods(periods) {
     return {
-        type: actionTypes.SET_SELECTED_PERIODS,
+        type: _actionTypes2.default.SET_SELECTED_PERIODS,
         periods: periods
     };
 };
 
-export var removeSelectedPeriods = function removeSelectedPeriods(periodsToRemove) {
+var removeSelectedPeriods = exports.removeSelectedPeriods = function removeSelectedPeriods(periodsToRemove) {
     return {
-        type: actionTypes.REMOVE_SELECTED_PERIODS,
+        type: _actionTypes2.default.REMOVE_SELECTED_PERIODS,
         periodsToRemove: periodsToRemove
     };
 };
 
-export var toggleSelectedPeriod = function toggleSelectedPeriod(period, index) {
+var toggleSelectedPeriod = exports.toggleSelectedPeriod = function toggleSelectedPeriod(period, index) {
     var isShiftPressed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
     var isCtrlPressed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     return {
-        type: actionTypes.TOGGLE_SELECTED_PERIOD,
+        type: _actionTypes2.default.TOGGLE_SELECTED_PERIOD,
         period: period,
         index: index,
         isShiftPressed: isShiftPressed,

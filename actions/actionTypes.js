@@ -1,4 +1,9 @@
-export default {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
     // PERIOD TYPE
     SET_PERIOD_TYPE: 'SET_PERIOD_TYPE',
     // OFFERED PERIODS

@@ -1,8 +1,25 @@
-import _toConsumableArray from 'babel-runtime/helpers/toConsumableArray';
-import _extends from 'babel-runtime/helpers/extends';
-import actionTypes from '../actions/actionTypes';
+'use strict';
 
-export var defaultState = {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.defaultState = undefined;
+
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _actionTypes = require('../actions/actionTypes');
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultState = exports.defaultState = {
     periods: [],
     lastClickedIndex: null
 };
@@ -13,17 +30,18 @@ export var defaultState = {
  * @param periodType
  * @returns {Function}
  */
-export default (function () {
+
+exports.default = function () {
     var periodType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'offered';
     return function () {
         var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
         var action = arguments[1];
 
         switch (action.type) {
-            case actionTypes['ADD_' + periodType.toUpperCase() + '_PERIODS']:
+            case _actionTypes2.default['ADD_' + periodType.toUpperCase() + '_PERIODS']:
                 {
                     var periods = action.periods.map(function (period) {
-                        return _extends({}, period, {
+                        return (0, _extends3.default)({}, period, {
                             selected: false
                         });
                     }).filter(function (period) {
@@ -32,28 +50,28 @@ export default (function () {
                         });
                     });
 
-                    return _extends({}, state, {
-                        periods: [].concat(_toConsumableArray(state.periods), _toConsumableArray(periods))
+                    return (0, _extends3.default)({}, state, {
+                        periods: [].concat((0, _toConsumableArray3.default)(state.periods), (0, _toConsumableArray3.default)(periods))
                     });
                 }
 
-            case actionTypes['SET_' + periodType.toUpperCase() + '_PERIODS']:
+            case _actionTypes2.default['SET_' + periodType.toUpperCase() + '_PERIODS']:
                 {
-                    return _extends({}, state, {
+                    return (0, _extends3.default)({}, state, {
                         periods: action.periods.map(function (period) {
-                            return _extends({}, period, {
+                            return (0, _extends3.default)({}, period, {
                                 selected: false
                             });
                         })
                     });
                 }
 
-            case actionTypes['REMOVE_' + periodType.toUpperCase() + '_PERIODS']:
+            case _actionTypes2.default['REMOVE_' + periodType.toUpperCase() + '_PERIODS']:
                 {
                     var periodsToRemove = action.periodsToRemove;
 
 
-                    return _extends({}, state, {
+                    return (0, _extends3.default)({}, state, {
                         periods: state.periods.filter(function (period) {
                             return !periodsToRemove.find(function (_period) {
                                 return _period.id === period.id;
@@ -62,7 +80,7 @@ export default (function () {
                     });
                 }
 
-            case actionTypes['TOGGLE_' + periodType.toUpperCase() + '_PERIOD']:
+            case _actionTypes2.default['TOGGLE_' + periodType.toUpperCase() + '_PERIOD']:
                 {
                     var index = action.index,
                         isShiftPressed = action.isShiftPressed,
@@ -72,14 +90,14 @@ export default (function () {
                     // current period and unselect all others
 
                     if (isCtrlPressed === false && isShiftPressed === false) {
-                        return _extends({}, state, {
+                        return (0, _extends3.default)({}, state, {
                             lastClickedIndex: index,
-                            periods: [].concat(_toConsumableArray(state.periods.slice(0, index).map(function (period) {
-                                return _extends({}, period, { selected: false });
-                            })), [_extends({}, state.periods[index], {
+                            periods: [].concat((0, _toConsumableArray3.default)(state.periods.slice(0, index).map(function (period) {
+                                return (0, _extends3.default)({}, period, { selected: false });
+                            })), [(0, _extends3.default)({}, state.periods[index], {
                                 selected: true
-                            })], _toConsumableArray(state.periods.slice(index + 1, state.periods.length).map(function (period) {
-                                return _extends({}, period, { selected: false });
+                            })], (0, _toConsumableArray3.default)(state.periods.slice(index + 1, state.periods.length).map(function (period) {
+                                return (0, _extends3.default)({}, period, { selected: false });
                             })))
                         });
                     }
@@ -91,22 +109,22 @@ export default (function () {
                     // then select every period from last selected period
                     // to currently selected period
                     if (isShiftPressed && state.lastClickedIndex !== null) {
-                        return _extends({}, state, {
-                            periods: [].concat(_toConsumableArray(state.periods.slice(0, minIndex)), _toConsumableArray(state.periods.slice(minIndex, maxIndex + 1).map(function (period) {
-                                return _extends({}, period, {
+                        return (0, _extends3.default)({}, state, {
+                            periods: [].concat((0, _toConsumableArray3.default)(state.periods.slice(0, minIndex)), (0, _toConsumableArray3.default)(state.periods.slice(minIndex, maxIndex + 1).map(function (period) {
+                                return (0, _extends3.default)({}, period, {
                                     selected: true
                                 });
-                            })), _toConsumableArray(state.periods.slice(maxIndex + 1, state.periods.length)))
+                            })), (0, _toConsumableArray3.default)(state.periods.slice(maxIndex + 1, state.periods.length)))
                         });
                     }
 
                     // If only control key was pressed, then just
                     // select period without unselecting others
-                    return _extends({}, state, {
+                    return (0, _extends3.default)({}, state, {
                         lastClickedIndex: !isShiftPressed && state.periods[index].selected === true ? state.lastClickedIndex : index,
-                        periods: [].concat(_toConsumableArray(state.periods.slice(0, index)), [_extends({}, state.periods[index], {
+                        periods: [].concat((0, _toConsumableArray3.default)(state.periods.slice(0, index)), [(0, _extends3.default)({}, state.periods[index], {
                             selected: !state.periods[index].selected
-                        })], _toConsumableArray(state.periods.slice(index + 1, state.periods.length)))
+                        })], (0, _toConsumableArray3.default)(state.periods.slice(index + 1, state.periods.length)))
                     });
                 }
 
@@ -114,4 +132,4 @@ export default (function () {
                 return state;
         }
     };
-});
+};

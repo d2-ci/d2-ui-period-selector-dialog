@@ -1,32 +1,91 @@
-import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-import _createClass from 'babel-runtime/helpers/createClass';
-import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
-import _inherits from 'babel-runtime/helpers/inherits';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import i18n from '@dhis2/d2-i18n';
-import Button from '@material-ui/core/Button';
-import RelativePeriodsGenerator from './utils/RelativePeriodsGenerator';
-import PeriodsList from './PeriodsList';
-import styles from './styles/PeriodListItem.style';
-import isEqual from 'lodash/isEqual';
+'use strict';
 
-export var defaultState = {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.defaultState = undefined;
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _FormControl = require('@material-ui/core/FormControl');
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _InputLabel = require('@material-ui/core/InputLabel');
+
+var _InputLabel2 = _interopRequireDefault(_InputLabel);
+
+var _Select = require('@material-ui/core/Select');
+
+var _Select2 = _interopRequireDefault(_Select);
+
+var _MenuItem = require('@material-ui/core/MenuItem');
+
+var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+var _d2I18n = require('@dhis2/d2-i18n');
+
+var _d2I18n2 = _interopRequireDefault(_d2I18n);
+
+var _Button = require('@material-ui/core/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _RelativePeriodsGenerator = require('./utils/RelativePeriodsGenerator');
+
+var _RelativePeriodsGenerator2 = _interopRequireDefault(_RelativePeriodsGenerator);
+
+var _PeriodsList = require('./PeriodsList');
+
+var _PeriodsList2 = _interopRequireDefault(_PeriodsList);
+
+var _PeriodListItem = require('./styles/PeriodListItem.style');
+
+var _PeriodListItem2 = _interopRequireDefault(_PeriodListItem);
+
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultState = exports.defaultState = {
     periodType: 'Months'
 };
 
 var RelativePeriods = function (_Component) {
-    _inherits(RelativePeriods, _Component);
+    (0, _inherits3.default)(RelativePeriods, _Component);
 
     function RelativePeriods(props) {
-        _classCallCheck(this, RelativePeriods);
+        (0, _classCallCheck3.default)(this, RelativePeriods);
 
-        var _this = _possibleConstructorReturn(this, (RelativePeriods.__proto__ || _Object$getPrototypeOf(RelativePeriods)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (RelativePeriods.__proto__ || (0, _getPrototypeOf2.default)(RelativePeriods)).call(this, props));
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType);
@@ -65,19 +124,19 @@ var RelativePeriods = function (_Component) {
         };
 
         _this.renderOptions = function () {
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 { className: 'options-area' },
-                React.createElement(
-                    FormControl,
+                _react2.default.createElement(
+                    _FormControl2.default,
                     { className: 'form-control period-type' },
-                    React.createElement(
-                        InputLabel,
-                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'period-type' },
-                        i18n.t('Period type')
+                    _react2.default.createElement(
+                        _InputLabel2.default,
+                        { style: _PeriodListItem2.default.inputLabel, className: 'input-label', htmlFor: 'period-type' },
+                        _d2I18n2.default.t('Period type')
                     ),
-                    React.createElement(
-                        Select,
+                    _react2.default.createElement(
+                        _Select2.default,
                         {
                             onChange: _this.onPeriodTypeChange,
                             value: _this.state.periodType,
@@ -86,8 +145,8 @@ var RelativePeriods = function (_Component) {
                             variant: 'filled'
                         },
                         _this.periodsGenerator.getOptions().map(function (option) {
-                            return React.createElement(
-                                MenuItem,
+                            return _react2.default.createElement(
+                                _MenuItem2.default,
                                 { value: option, key: option },
                                 option
                             );
@@ -100,34 +159,34 @@ var RelativePeriods = function (_Component) {
         _this.render = function () {
             var Options = _this.renderOptions();
 
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 { className: 'selector-area' },
                 Options,
-                React.createElement(PeriodsList, {
+                _react2.default.createElement(_PeriodsList2.default, {
                     items: _this.props.items,
                     onPeriodClick: _this.props.onPeriodClick,
                     onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
                     listClassName: 'periods-list-offered'
                 }),
-                React.createElement(
+                _react2.default.createElement(
                     'div',
                     { style: { textAlign: 'center' } },
-                    React.createElement(
-                        Button,
+                    _react2.default.createElement(
+                        _Button2.default,
                         { onClick: _this.selectAll },
-                        i18n.t('Select all')
+                        _d2I18n2.default.t('Select all')
                     )
                 )
             );
         };
 
         _this.state = defaultState;
-        _this.periodsGenerator = new RelativePeriodsGenerator();
+        _this.periodsGenerator = new _RelativePeriodsGenerator2.default();
         return _this;
     }
 
-    _createClass(RelativePeriods, [{
+    (0, _createClass3.default)(RelativePeriods, [{
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             var prevItems = prevProps.selectedItems.map(function (period) {
@@ -137,23 +196,22 @@ var RelativePeriods = function (_Component) {
                 return period.id;
             });
 
-            if (!isEqual(prevItems, currentItems)) {
+            if (!(0, _isEqual2.default)(prevItems, currentItems)) {
                 this.setOfferedPeriods(this.generatePeriods(this.state.periodType, this.state.year));
             }
         }
     }]);
-
     return RelativePeriods;
-}(Component);
+}(_react.Component);
 
 RelativePeriods.propTypes = {
-    items: PropTypes.array.isRequired,
-    selectedItems: PropTypes.array.isRequired,
-    setOfferedPeriods: PropTypes.func.isRequired,
-    setOfferedPeriodIds: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    onPeriodDoubleClick: PropTypes.func.isRequired,
-    onPeriodClick: PropTypes.func.isRequired
+    items: _propTypes2.default.array.isRequired,
+    selectedItems: _propTypes2.default.array.isRequired,
+    setOfferedPeriods: _propTypes2.default.func.isRequired,
+    setOfferedPeriodIds: _propTypes2.default.func.isRequired,
+    onSelect: _propTypes2.default.func.isRequired,
+    onPeriodDoubleClick: _propTypes2.default.func.isRequired,
+    onPeriodClick: _propTypes2.default.func.isRequired
 };
 
-export default RelativePeriods;
+exports.default = RelativePeriods;

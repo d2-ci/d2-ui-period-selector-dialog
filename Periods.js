@@ -1,66 +1,121 @@
-import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-import _createClass from 'babel-runtime/helpers/createClass';
-import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
-import _inherits from 'babel-runtime/helpers/inherits';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import isEqual from 'lodash/isEqual';
-import PeriodTypeButton from './PeriodTypeButton';
-import SelectedPeriods from './SelectedPeriods';
-import { OfferedPeriods } from './OfferedPeriods';
-import PeriodTypes from './PeriodTypes';
-import styles from './styles/PeriodListItem.style';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _IconButton = require('@material-ui/core/IconButton');
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
+var _ArrowForward = require('@material-ui/icons/ArrowForward');
+
+var _ArrowForward2 = _interopRequireDefault(_ArrowForward);
+
+var _ArrowBack = require('@material-ui/icons/ArrowBack');
+
+var _ArrowBack2 = _interopRequireDefault(_ArrowBack);
+
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
+var _PeriodTypeButton = require('./PeriodTypeButton');
+
+var _PeriodTypeButton2 = _interopRequireDefault(_PeriodTypeButton);
+
+var _SelectedPeriods = require('./SelectedPeriods');
+
+var _SelectedPeriods2 = _interopRequireDefault(_SelectedPeriods);
+
+var _OfferedPeriods = require('./OfferedPeriods');
+
+var _PeriodTypes = require('./PeriodTypes');
+
+var _PeriodTypes2 = _interopRequireDefault(_PeriodTypes);
+
+var _PeriodListItem = require('./styles/PeriodListItem.style');
+
+var _PeriodListItem2 = _interopRequireDefault(_PeriodListItem);
+
+require('./PeriodSelector.css');
+
+var _actions = require('./actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // eslint-disable-next-line import/no-unresolved
-import './PeriodSelector.css';
-
-import { setPeriodType, addOfferedPeriods, setOfferedPeriods, setSelectedPeriods, removeOfferedPeriods, toggleOfferedPeriod, addSelectedPeriods, removeSelectedPeriods, toggleSelectedPeriod } from './actions';
-
 var SelectButton = function SelectButton(_ref) {
     var action = _ref.action;
-    return React.createElement(
-        IconButton,
+    return _react2.default.createElement(
+        _IconButton2.default,
         {
-            style: styles.arrowButton,
+            style: _PeriodListItem2.default.arrowButton,
             className: 'select-button',
             onClick: action
         },
-        React.createElement(ArrowForwardIcon, { style: styles.arrowIcon })
+        _react2.default.createElement(_ArrowForward2.default, { style: _PeriodListItem2.default.arrowIcon })
     );
 };
 
 SelectButton.propTypes = {
-    action: PropTypes.func.isRequired
+    action: _propTypes2.default.func.isRequired
 };
 
 var DeselectButton = function DeselectButton(_ref2) {
     var action = _ref2.action;
-    return React.createElement(
-        IconButton,
+    return _react2.default.createElement(
+        _IconButton2.default,
         {
-            style: styles.arrowButton,
+            style: _PeriodListItem2.default.arrowButton,
             className: 'select-button',
             onClick: action
         },
-        React.createElement(ArrowBackIcon, { style: styles.arrowIcon })
+        _react2.default.createElement(_ArrowBack2.default, { style: _PeriodListItem2.default.arrowIcon })
     );
 };
 
 DeselectButton.propTypes = {
-    action: PropTypes.func.isRequired
+    action: _propTypes2.default.func.isRequired
 };
 
 var Periods = function (_Component) {
-    _inherits(Periods, _Component);
+    (0, _inherits3.default)(Periods, _Component);
 
     function Periods(props) {
-        _classCallCheck(this, Periods);
+        (0, _classCallCheck3.default)(this, Periods);
 
-        var _this = _possibleConstructorReturn(this, (Periods.__proto__ || _Object$getPrototypeOf(Periods)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (Periods.__proto__ || (0, _getPrototypeOf2.default)(Periods)).call(this, props));
 
         _this.onPeriodTypeClick = function (periodType) {
             if (_this.props.periodType !== periodType) {
@@ -133,17 +188,17 @@ var Periods = function (_Component) {
         };
 
         _this.renderPeriodTypeButtons = function () {
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 null,
-                React.createElement(PeriodTypeButton, {
-                    periodType: PeriodTypes.RELATIVE,
+                _react2.default.createElement(_PeriodTypeButton2.default, {
+                    periodType: _PeriodTypes2.default.RELATIVE,
                     activePeriodType: _this.props.periodType,
                     text: 'Relative periods',
                     onClick: _this.onPeriodTypeClick
                 }),
-                React.createElement(PeriodTypeButton, {
-                    periodType: PeriodTypes.FIXED,
+                _react2.default.createElement(_PeriodTypeButton2.default, {
+                    periodType: _PeriodTypes2.default.FIXED,
                     activePeriodType: _this.props.periodType,
                     text: 'Fixed periods',
                     onClick: _this.onPeriodTypeClick
@@ -152,11 +207,11 @@ var Periods = function (_Component) {
         };
 
         _this.renderSelectButtons = function () {
-            return React.createElement(
-                Fragment,
+            return _react2.default.createElement(
+                _react.Fragment,
                 null,
-                React.createElement(SelectButton, { action: _this.onSelectPeriods }),
-                React.createElement(DeselectButton, { action: _this.onDeselectPeriods })
+                _react2.default.createElement(SelectButton, { action: _this.onSelectPeriods }),
+                _react2.default.createElement(DeselectButton, { action: _this.onDeselectPeriods })
             );
         };
 
@@ -164,17 +219,17 @@ var Periods = function (_Component) {
             var PeriodTypeButtons = _this.renderPeriodTypeButtons();
             var SelectButtons = _this.renderSelectButtons();
 
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 null,
                 PeriodTypeButtons,
-                React.createElement(
+                _react2.default.createElement(
                     'div',
                     { className: 'periods-container' },
-                    React.createElement(
+                    _react2.default.createElement(
                         'div',
                         { className: 'block options' },
-                        React.createElement(OfferedPeriods, {
+                        _react2.default.createElement(_OfferedPeriods.OfferedPeriods, {
                             periodType: _this.props.periodType,
                             items: _this.props.offeredPeriods.periods,
                             onPeriodDoubleClick: _this.onOfferedPeriodDoubleClick,
@@ -186,15 +241,15 @@ var Periods = function (_Component) {
                             onSelect: _this.props.onSelect
                         })
                     ),
-                    React.createElement(
+                    _react2.default.createElement(
                         'div',
                         { className: 'block buttons' },
                         SelectButtons
                     ),
-                    React.createElement(
+                    _react2.default.createElement(
                         'div',
                         { className: 'block selected-periods' },
-                        React.createElement(SelectedPeriods, {
+                        _react2.default.createElement(_SelectedPeriods2.default, {
                             items: _this.props.selectedPeriods.periods,
                             onClearAll: _this.onClearAll,
                             onPeriodDoubleClick: _this.onSelectedPeriodDoubleClick,
@@ -215,7 +270,7 @@ var Periods = function (_Component) {
         return _this;
     }
 
-    _createClass(Periods, [{
+    (0, _createClass3.default)(Periods, [{
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             var prevItems = prevProps.selectedItems.map(function (period) {
@@ -225,32 +280,31 @@ var Periods = function (_Component) {
                 return period.id;
             });
 
-            if (!isEqual(prevItems, currentItems)) {
+            if (!(0, _isEqual2.default)(prevItems, currentItems)) {
                 this.props.setSelectedPeriods(this.props.selectedItems);
             }
         }
     }]);
-
     return Periods;
-}(Component);
+}(_react.Component);
 
 Periods.propTypes = {
-    onSelect: PropTypes.func.isRequired,
-    onDeselect: PropTypes.func.isRequired,
-    onReorder: PropTypes.func.isRequired,
-    selectedItems: PropTypes.array.isRequired,
-    periodType: PropTypes.string.isRequired,
-    offeredPeriods: PropTypes.object.isRequired,
-    selectedPeriods: PropTypes.object.isRequired,
-    setPeriodType: PropTypes.func.isRequired,
-    setOfferedPeriods: PropTypes.func.isRequired,
-    setSelectedPeriods: PropTypes.func.isRequired,
-    addSelectedPeriods: PropTypes.func.isRequired,
-    addOfferedPeriods: PropTypes.func.isRequired,
-    removeOfferedPeriods: PropTypes.func.isRequired,
-    removeSelectedPeriods: PropTypes.func.isRequired,
-    toggleOfferedPeriod: PropTypes.func.isRequired,
-    toggleSelectedPeriod: PropTypes.func.isRequired
+    onSelect: _propTypes2.default.func.isRequired,
+    onDeselect: _propTypes2.default.func.isRequired,
+    onReorder: _propTypes2.default.func.isRequired,
+    selectedItems: _propTypes2.default.array.isRequired,
+    periodType: _propTypes2.default.string.isRequired,
+    offeredPeriods: _propTypes2.default.object.isRequired,
+    selectedPeriods: _propTypes2.default.object.isRequired,
+    setPeriodType: _propTypes2.default.func.isRequired,
+    setOfferedPeriods: _propTypes2.default.func.isRequired,
+    setSelectedPeriods: _propTypes2.default.func.isRequired,
+    addSelectedPeriods: _propTypes2.default.func.isRequired,
+    addOfferedPeriods: _propTypes2.default.func.isRequired,
+    removeOfferedPeriods: _propTypes2.default.func.isRequired,
+    removeSelectedPeriods: _propTypes2.default.func.isRequired,
+    toggleOfferedPeriod: _propTypes2.default.func.isRequired,
+    toggleSelectedPeriod: _propTypes2.default.func.isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -262,15 +316,15 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-    setPeriodType: setPeriodType,
-    addOfferedPeriods: addOfferedPeriods,
-    setOfferedPeriods: setOfferedPeriods,
-    setSelectedPeriods: setSelectedPeriods,
-    removeOfferedPeriods: removeOfferedPeriods,
-    toggleOfferedPeriod: toggleOfferedPeriod,
-    addSelectedPeriods: addSelectedPeriods,
-    removeSelectedPeriods: removeSelectedPeriods,
-    toggleSelectedPeriod: toggleSelectedPeriod
+    setPeriodType: _actions.setPeriodType,
+    addOfferedPeriods: _actions.addOfferedPeriods,
+    setOfferedPeriods: _actions.setOfferedPeriods,
+    setSelectedPeriods: _actions.setSelectedPeriods,
+    removeOfferedPeriods: _actions.removeOfferedPeriods,
+    toggleOfferedPeriod: _actions.toggleOfferedPeriod,
+    addSelectedPeriods: _actions.addSelectedPeriods,
+    removeSelectedPeriods: _actions.removeSelectedPeriods,
+    toggleSelectedPeriod: _actions.toggleSelectedPeriod
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Periods);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Periods);
