@@ -1,5 +1,19 @@
-import _Object$keys from 'babel-runtime/core-js/object/keys';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var DaysPeriodType = {
     generatePeriods: function generatePeriods() {
         return [{ id: 'TODAY', name: 'Today' }, { id: 'YESTERDAY', name: 'Yesterday' }, { id: 'LAST_3_DAYS', name: 'Last 3 days' }, { id: 'LAST_7_DAYS', name: 'Last 7 days' }, { id: 'LAST_14_DAYS', name: 'Last 14 days' }];
@@ -51,8 +65,7 @@ var YearsPeriodType = {
 var Generator = function Generator() {
     var _this = this;
 
-    _classCallCheck(this, Generator);
-
+    (0, _classCallCheck3.default)(this, Generator);
     this.options = {
         Days: DaysPeriodType,
         Weeks: WeeksPeriodType,
@@ -69,8 +82,8 @@ var Generator = function Generator() {
     };
 
     this.getOptions = function () {
-        return _Object$keys(_this.options);
+        return (0, _keys2.default)(_this.options);
     };
 };
 
-export default Generator;
+exports.default = Generator;

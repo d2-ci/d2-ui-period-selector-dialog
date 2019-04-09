@@ -1,2 +1,7 @@
-export var FIXED = 'FIXED';
-export var RELATIVE = 'RELATIVE';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FIXED = exports.FIXED = 'FIXED';
+var RELATIVE = exports.RELATIVE = 'RELATIVE';

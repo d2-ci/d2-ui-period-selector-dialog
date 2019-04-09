@@ -1,33 +1,66 @@
-import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
-import _inherits from 'babel-runtime/helpers/inherits';
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+'use strict';
 
-import { ItemSelector } from 'analytics-shared-components';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-import PeriodTypeButton from './PeriodTypeButton';
-import FixedPeriodFIlter from './FixedPeriodFilter';
-import RelativePeriodFilter from './RelativePeriodFilter';
-import { FIXED, RELATIVE } from './modules/periodTypes';
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
-// eslint-disable-next-line import/no-unresolved
-import './PeriodSelector.css';
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _d2UiAnalytics = require('@dhis2/d2-ui-analytics');
+
+var _PeriodTypeButton = require('./PeriodTypeButton');
+
+var _PeriodTypeButton2 = _interopRequireDefault(_PeriodTypeButton);
+
+var _FixedPeriodFilter = require('./FixedPeriodFilter');
+
+var _FixedPeriodFilter2 = _interopRequireDefault(_FixedPeriodFilter);
+
+var _RelativePeriodFilter = require('./RelativePeriodFilter');
+
+var _RelativePeriodFilter2 = _interopRequireDefault(_RelativePeriodFilter);
+
+var _periodTypes = require('./modules/periodTypes');
+
+require('./PeriodSelector.css');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PeriodSelector = function (_Component) {
-    _inherits(PeriodSelector, _Component);
+    (0, _inherits3.default)(PeriodSelector, _Component);
 
     function PeriodSelector(props) {
-        _classCallCheck(this, PeriodSelector);
+        (0, _classCallCheck3.default)(this, PeriodSelector);
 
-        var _this = _possibleConstructorReturn(this, (PeriodSelector.__proto__ || _Object$getPrototypeOf(PeriodSelector)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (PeriodSelector.__proto__ || (0, _getPrototypeOf2.default)(PeriodSelector)).call(this, props));
 
         _this.state = {
             offeredPeriods: [],
             offeredPeriodsInOrder: [],
             selectedPeriods: [],
-            periodType: RELATIVE
+            periodType: _periodTypes.RELATIVE
         };
 
         _this.onPeriodTypeClick = function (periodType) {
@@ -91,17 +124,17 @@ var PeriodSelector = function (_Component) {
         };
 
         _this.renderPeriodTypeButtons = function () {
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 null,
-                React.createElement(PeriodTypeButton, {
-                    periodType: RELATIVE,
+                _react2.default.createElement(_PeriodTypeButton2.default, {
+                    periodType: _periodTypes.RELATIVE,
                     activePeriodType: _this.state.periodType,
                     text: 'Relative periods',
                     onClick: _this.onPeriodTypeClick
                 }),
-                React.createElement(PeriodTypeButton, {
-                    periodType: FIXED,
+                _react2.default.createElement(_PeriodTypeButton2.default, {
+                    periodType: _periodTypes.FIXED,
                     activePeriodType: _this.state.periodType,
                     text: 'Fixed periods',
                     onClick: _this.onPeriodTypeClick
@@ -111,11 +144,11 @@ var PeriodSelector = function (_Component) {
 
         _this.render = function () {
             var filterZone = function filterZone() {
-                if (_this.state.periodType === FIXED) {
-                    return React.createElement(FixedPeriodFIlter, { setOfferedPeriods: _this.initializeOfferedPeriods });
+                if (_this.state.periodType === _periodTypes.FIXED) {
+                    return _react2.default.createElement(_FixedPeriodFilter2.default, { setOfferedPeriods: _this.initializeOfferedPeriods });
                 }
 
-                return React.createElement(RelativePeriodFilter, { setOfferedPeriods: _this.initializeOfferedPeriods });
+                return _react2.default.createElement(_RelativePeriodFilter2.default, { setOfferedPeriods: _this.initializeOfferedPeriods });
             };
 
             var unselected = {
@@ -130,15 +163,15 @@ var PeriodSelector = function (_Component) {
                 onReorder: _this.setSelectedPeriodOrder
             };
 
-            return React.createElement(
-                Fragment,
+            return _react2.default.createElement(
+                _react.Fragment,
                 null,
                 _this.renderPeriodTypeButtons(),
-                React.createElement(
+                _react2.default.createElement(
                     'div',
                     { style: { display: 'flex', marginTop: '18px' } },
-                    React.createElement(
-                        ItemSelector,
+                    _react2.default.createElement(
+                        _d2UiAnalytics.ItemSelector,
                         {
                             itemClassName: 'period-selector',
                             unselected: unselected,
@@ -155,17 +188,20 @@ var PeriodSelector = function (_Component) {
     }
 
     return PeriodSelector;
-}(Component);
+}(_react.Component);
+
+// eslint-disable-next-line import/no-unresolved
+
 
 PeriodSelector.propTypes = {
-    onSelect: PropTypes.func.isRequired,
-    onDeselect: PropTypes.func.isRequired,
-    onReorder: PropTypes.func.isRequired,
-    selectedItems: PropTypes.arrayOf(PropTypes.object)
+    onSelect: _propTypes2.default.func.isRequired,
+    onDeselect: _propTypes2.default.func.isRequired,
+    onReorder: _propTypes2.default.func.isRequired,
+    selectedItems: _propTypes2.default.arrayOf(_propTypes2.default.object)
 };
 
 PeriodSelector.defaultProps = {
     selectedItems: []
 };
 
-export default PeriodSelector;
+exports.default = PeriodSelector;

@@ -1,31 +1,79 @@
-import _extends from 'babel-runtime/helpers/extends';
-import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
-import _inherits from 'babel-runtime/helpers/inherits';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+'use strict';
 
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.defaultState = undefined;
 
-import i18n from '@dhis2/d2-i18n';
-import RelativePeriodsGenerator from './modules/RelativePeriodsGenerator';
-import styles from './styles/PeriodFilter.style';
+var _extends2 = require('babel-runtime/helpers/extends');
 
-export var defaultState = {
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _FormControl = require('@material-ui/core/FormControl');
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _InputLabel = require('@material-ui/core/InputLabel');
+
+var _InputLabel2 = _interopRequireDefault(_InputLabel);
+
+var _Select = require('@material-ui/core/Select');
+
+var _Select2 = _interopRequireDefault(_Select);
+
+var _MenuItem = require('@material-ui/core/MenuItem');
+
+var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+var _d2I18n = require('@dhis2/d2-i18n');
+
+var _d2I18n2 = _interopRequireDefault(_d2I18n);
+
+var _RelativePeriodsGenerator = require('./modules/RelativePeriodsGenerator');
+
+var _RelativePeriodsGenerator2 = _interopRequireDefault(_RelativePeriodsGenerator);
+
+var _PeriodFilter = require('./styles/PeriodFilter.style');
+
+var _PeriodFilter2 = _interopRequireDefault(_PeriodFilter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultState = exports.defaultState = {
     periodType: 'Months'
 };
 
 var RelativePeriods = function (_Component) {
-    _inherits(RelativePeriods, _Component);
+    (0, _inherits3.default)(RelativePeriods, _Component);
 
     function RelativePeriods(props) {
-        _classCallCheck(this, RelativePeriods);
+        (0, _classCallCheck3.default)(this, RelativePeriods);
 
-        var _this = _possibleConstructorReturn(this, (RelativePeriods.__proto__ || _Object$getPrototypeOf(RelativePeriods)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (RelativePeriods.__proto__ || (0, _getPrototypeOf2.default)(RelativePeriods)).call(this, props));
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType);
@@ -44,24 +92,24 @@ var RelativePeriods = function (_Component) {
             var generator = _this.periodsGenerator.get(periodType);
 
             return generator.generatePeriods().map(function (period, idx) {
-                return _extends({}, period, { idx: idx });
+                return (0, _extends3.default)({}, period, { idx: idx });
             });
         };
 
         _this.render = function () {
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 { className: 'options-area' },
-                React.createElement(
-                    FormControl,
+                _react2.default.createElement(
+                    _FormControl2.default,
                     { className: 'form-control period-type' },
-                    React.createElement(
-                        InputLabel,
-                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'period-type' },
-                        i18n.t('Period type')
+                    _react2.default.createElement(
+                        _InputLabel2.default,
+                        { style: _PeriodFilter2.default.inputLabel, className: 'input-label', htmlFor: 'period-type' },
+                        _d2I18n2.default.t('Period type')
                     ),
-                    React.createElement(
-                        Select,
+                    _react2.default.createElement(
+                        _Select2.default,
                         {
                             onChange: _this.onPeriodTypeChange,
                             value: _this.state.periodType,
@@ -70,8 +118,8 @@ var RelativePeriods = function (_Component) {
                             variant: 'filled'
                         },
                         _this.periodsGenerator.getOptions().map(function (option) {
-                            return React.createElement(
-                                MenuItem,
+                            return _react2.default.createElement(
+                                _MenuItem2.default,
                                 { value: option, key: option },
                                 option
                             );
@@ -82,15 +130,15 @@ var RelativePeriods = function (_Component) {
         };
 
         _this.state = defaultState;
-        _this.periodsGenerator = new RelativePeriodsGenerator();
+        _this.periodsGenerator = new _RelativePeriodsGenerator2.default();
         return _this;
     }
 
     return RelativePeriods;
-}(Component);
+}(_react.Component);
 
 RelativePeriods.propTypes = {
-    setOfferedPeriods: PropTypes.func.isRequired
+    setOfferedPeriods: _propTypes2.default.func.isRequired
 };
 
-export default RelativePeriods;
+exports.default = RelativePeriods;

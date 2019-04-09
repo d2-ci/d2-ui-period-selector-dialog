@@ -1,4 +1,15 @@
-import _Object$keys from 'babel-runtime/core-js/object/keys';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // generatePeriods config object: { boolean offset, boolean filterFuturePeriods, boolean reversePeriods }
 
 function DailyPeriodType(formatYyyyMmDd, fnFilter) {
@@ -412,8 +423,8 @@ function PeriodType() {
         return periodTypes[key];
     };
     this.getOptions = function () {
-        return _Object$keys(periodTypes);
+        return (0, _keys2.default)(periodTypes);
     };
 }
 
-export default PeriodType;
+exports.default = PeriodType;

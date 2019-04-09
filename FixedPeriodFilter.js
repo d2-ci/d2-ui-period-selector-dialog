@@ -1,41 +1,104 @@
-import _extends from 'babel-runtime/helpers/extends';
-import _toConsumableArray from 'babel-runtime/helpers/toConsumableArray';
-import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
-import _createClass from 'babel-runtime/helpers/createClass';
-import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
-import _inherits from 'babel-runtime/helpers/inherits';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+'use strict';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import FormControl from '@material-ui/core/FormControl';
-import ArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import ArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.YEARS_RANGE = exports.defaultState = undefined;
 
-import i18n from '@dhis2/d2-i18n';
-import FixedPeriodsGenerator from './modules/FixedPeriodsGenerator';
-import styles from './styles/PeriodFilter.style';
+var _extends2 = require('babel-runtime/helpers/extends');
 
-export var defaultState = {
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _InputLabel = require('@material-ui/core/InputLabel');
+
+var _InputLabel2 = _interopRequireDefault(_InputLabel);
+
+var _Select = require('@material-ui/core/Select');
+
+var _Select2 = _interopRequireDefault(_Select);
+
+var _MenuItem = require('@material-ui/core/MenuItem');
+
+var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+var _Menu = require('@material-ui/core/Menu');
+
+var _Menu2 = _interopRequireDefault(_Menu);
+
+var _FormControl = require('@material-ui/core/FormControl');
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _KeyboardArrowDown = require('@material-ui/icons/KeyboardArrowDown');
+
+var _KeyboardArrowDown2 = _interopRequireDefault(_KeyboardArrowDown);
+
+var _KeyboardArrowUp = require('@material-ui/icons/KeyboardArrowUp');
+
+var _KeyboardArrowUp2 = _interopRequireDefault(_KeyboardArrowUp);
+
+var _d2I18n = require('@dhis2/d2-i18n');
+
+var _d2I18n2 = _interopRequireDefault(_d2I18n);
+
+var _FixedPeriodsGenerator = require('./modules/FixedPeriodsGenerator');
+
+var _FixedPeriodsGenerator2 = _interopRequireDefault(_FixedPeriodsGenerator);
+
+var _PeriodFilter = require('./styles/PeriodFilter.style');
+
+var _PeriodFilter2 = _interopRequireDefault(_PeriodFilter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultState = exports.defaultState = {
     periodType: 'Monthly',
     year: new Date().getFullYear(),
     yearsOffset: 0,
     yearSelectElement: null
 };
 
-export var YEARS_RANGE = 8;
+var YEARS_RANGE = exports.YEARS_RANGE = 8;
 
 var FixedPeriodFilter = function (_Component) {
-    _inherits(FixedPeriodFilter, _Component);
+    (0, _inherits3.default)(FixedPeriodFilter, _Component);
 
     function FixedPeriodFilter(props, context) {
-        _classCallCheck(this, FixedPeriodFilter);
+        (0, _classCallCheck3.default)(this, FixedPeriodFilter);
 
-        var _this = _possibleConstructorReturn(this, (FixedPeriodFilter.__proto__ || _Object$getPrototypeOf(FixedPeriodFilter)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (FixedPeriodFilter.__proto__ || (0, _getPrototypeOf2.default)(FixedPeriodFilter)).call(this, props));
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType, _this.state.year);
@@ -71,11 +134,11 @@ var FixedPeriodFilter = function (_Component) {
         _this.getYears = function () {
             var years = [];
 
-            years = years.concat([].concat(_toConsumableArray(Array(Math.floor(YEARS_RANGE / 2) + (YEARS_RANGE % 2 === 0 ? 1 : 2)).keys())).slice(1).reverse().map(function (offset) {
+            years = years.concat([].concat((0, _toConsumableArray3.default)(Array(Math.floor(YEARS_RANGE / 2) + (YEARS_RANGE % 2 === 0 ? 1 : 2)).keys())).slice(1).reverse().map(function (offset) {
                 return new Date().getFullYear() - offset + _this.state.yearsOffset;
             }));
 
-            years = years.concat([].concat(_toConsumableArray(Array(Math.floor(YEARS_RANGE / 2)).keys())).map(function (offset) {
+            years = years.concat([].concat((0, _toConsumableArray3.default)(Array(Math.floor(YEARS_RANGE / 2)).keys())).map(function (offset) {
                 return new Date().getFullYear() + offset + _this.state.yearsOffset;
             }));
 
@@ -90,7 +153,7 @@ var FixedPeriodFilter = function (_Component) {
                 filterFuturePeriods: false,
                 reversePeriods: false
             }).map(function (period, idx) {
-                return _extends({}, period, { idx: idx });
+                return (0, _extends3.default)({}, period, { idx: idx });
             });;
         };
 
@@ -110,32 +173,32 @@ var FixedPeriodFilter = function (_Component) {
             return _this.state.year;
         };
 
-        _this.periodsGenerator = new FixedPeriodsGenerator();
+        _this.periodsGenerator = new _FixedPeriodsGenerator2.default();
         _this.i18n = context.d2.i18n;
         _this.state = defaultState;
         return _this;
     }
 
-    _createClass(FixedPeriodFilter, [{
+    (0, _createClass3.default)(FixedPeriodFilter, [{
         key: 'render',
         value: function render() {
             var _this2 = this;
 
             var years = this.getYears();
 
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 { className: 'options-area' },
-                React.createElement(
-                    FormControl,
+                _react2.default.createElement(
+                    _FormControl2.default,
                     { className: 'form-control period-type' },
-                    React.createElement(
-                        InputLabel,
-                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'period-type' },
-                        i18n.t('Period type')
+                    _react2.default.createElement(
+                        _InputLabel2.default,
+                        { style: _PeriodFilter2.default.inputLabel, className: 'input-label', htmlFor: 'period-type' },
+                        _d2I18n2.default.t('Period type')
                     ),
-                    React.createElement(
-                        Select,
+                    _react2.default.createElement(
+                        _Select2.default,
                         {
                             onChange: this.onPeriodTypeChange,
                             value: this.state.periodType,
@@ -143,23 +206,23 @@ var FixedPeriodFilter = function (_Component) {
                             disableUnderline: true
                         },
                         this.periodsGenerator.getOptions().map(function (option) {
-                            return React.createElement(
-                                MenuItem,
+                            return _react2.default.createElement(
+                                _MenuItem2.default,
                                 { value: option, key: option },
                                 option
                             );
                         })
                     )
                 ),
-                React.createElement(
-                    FormControl,
+                _react2.default.createElement(
+                    _FormControl2.default,
                     { className: 'form-control year' },
-                    React.createElement(
-                        InputLabel,
-                        { style: styles.inputLabel, className: 'input-label', htmlFor: 'year' },
-                        i18n.t('Year')
+                    _react2.default.createElement(
+                        _InputLabel2.default,
+                        { style: _PeriodFilter2.default.inputLabel, className: 'input-label', htmlFor: 'year' },
+                        _d2I18n2.default.t('Year')
                     ),
-                    React.createElement(Select, {
+                    _react2.default.createElement(_Select2.default, {
                         SelectDisplayProps: {
                             id: 'year-select',
                             onClick: this.onYearSelectClick
@@ -170,8 +233,8 @@ var FixedPeriodFilter = function (_Component) {
                         disableUnderline: true,
                         disabled: true
                     }),
-                    React.createElement(
-                        Menu,
+                    _react2.default.createElement(
+                        _Menu2.default,
                         {
                             MenuListProps: {
                                 id: 'year-select-menu'
@@ -180,18 +243,18 @@ var FixedPeriodFilter = function (_Component) {
                             open: Boolean(this.state.yearSelectElement),
                             onClose: this.closeYearSelect
                         },
-                        React.createElement(
-                            MenuItem,
+                        _react2.default.createElement(
+                            _MenuItem2.default,
                             {
                                 value: '',
                                 key: 'shiftYearsBack',
                                 onClick: this.shiftYearsBack
                             },
-                            React.createElement(ArrowUpIcon, null)
+                            _react2.default.createElement(_KeyboardArrowUp2.default, null)
                         ),
                         years.map(function (year) {
-                            return React.createElement(
-                                MenuItem,
+                            return _react2.default.createElement(
+                                _MenuItem2.default,
                                 {
                                     onClick: _this2.onYearChange,
                                     key: year,
@@ -201,30 +264,29 @@ var FixedPeriodFilter = function (_Component) {
                                 year
                             );
                         }),
-                        React.createElement(
-                            MenuItem,
+                        _react2.default.createElement(
+                            _MenuItem2.default,
                             {
                                 value: '',
                                 key: 'shiftYearsForth',
                                 onClick: this.shiftYearsForth
                             },
-                            React.createElement(ArrowDownIcon, null)
+                            _react2.default.createElement(_KeyboardArrowDown2.default, null)
                         )
                     )
                 )
             );
         }
     }]);
-
     return FixedPeriodFilter;
-}(Component);
+}(_react.Component);
 
 FixedPeriodFilter.propTypes = {
-    setOfferedPeriods: PropTypes.func.isRequired
+    setOfferedPeriods: _propTypes2.default.func.isRequired
 };
 
 FixedPeriodFilter.contextTypes = {
-    d2: PropTypes.object
+    d2: _propTypes2.default.object
 };
 
-export default FixedPeriodFilter;
+exports.default = FixedPeriodFilter;
