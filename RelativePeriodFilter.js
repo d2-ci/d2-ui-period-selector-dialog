@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultState = undefined;
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -12,10 +16,6 @@ var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
 
@@ -53,25 +53,13 @@ var _d2I18n = require('@dhis2/d2-i18n');
 
 var _d2I18n2 = _interopRequireDefault(_d2I18n);
 
-var _Button = require('@material-ui/core/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _RelativePeriodsGenerator = require('./utils/RelativePeriodsGenerator');
+var _RelativePeriodsGenerator = require('./modules/RelativePeriodsGenerator');
 
 var _RelativePeriodsGenerator2 = _interopRequireDefault(_RelativePeriodsGenerator);
 
-var _PeriodsList = require('./PeriodsList');
+var _PeriodFilter = require('./styles/PeriodFilter.style');
 
-var _PeriodsList2 = _interopRequireDefault(_PeriodsList);
-
-var _PeriodListItem = require('./styles/PeriodListItem.style');
-
-var _PeriodListItem2 = _interopRequireDefault(_PeriodListItem);
-
-var _isEqual = require('lodash/isEqual');
-
-var _isEqual2 = _interopRequireDefault(_isEqual);
+var _PeriodFilter2 = _interopRequireDefault(_PeriodFilter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89,8 +77,7 @@ var RelativePeriods = function (_Component) {
 
         _this.componentDidMount = function () {
             var periods = _this.generatePeriods(_this.state.periodType);
-
-            _this.setOfferedPeriods(periods);
+            _this.props.setOfferedPeriods(periods, true);
         };
 
         _this.onPeriodTypeChange = function (event) {
@@ -98,32 +85,18 @@ var RelativePeriods = function (_Component) {
                 periodType: event.target.value
             });
 
-            _this.setOfferedPeriods(_this.generatePeriods(event.target.value));
-        };
-
-        _this.setOfferedPeriods = function (periods) {
-            var selectedIds = _this.props.selectedItems.map(function (period) {
-                return period.id;
-            });
-
-            _this.props.setOfferedPeriodIds(periods);
-            _this.props.setOfferedPeriods(periods.filter(function (period) {
-                return !selectedIds.includes(period.id);
-            }));
+            _this.props.setOfferedPeriods(_this.generatePeriods(event.target.value));
         };
 
         _this.generatePeriods = function (periodType) {
             var generator = _this.periodsGenerator.get(periodType);
 
-            return generator.generatePeriods();
+            return generator.generatePeriods().map(function (period, idx) {
+                return (0, _extends3.default)({}, period, { idx: idx });
+            });
         };
 
-        _this.selectAll = function () {
-            _this.props.onSelect(_this.props.items);
-            _this.props.setOfferedPeriods([]);
-        };
-
-        _this.renderOptions = function () {
+        _this.render = function () {
             return _react2.default.createElement(
                 'div',
                 { className: 'options-area' },
@@ -132,7 +105,7 @@ var RelativePeriods = function (_Component) {
                     { className: 'form-control period-type' },
                     _react2.default.createElement(
                         _InputLabel2.default,
-                        { style: _PeriodListItem2.default.inputLabel, className: 'input-label', htmlFor: 'period-type' },
+                        { style: _PeriodFilter2.default.inputLabel, className: 'input-label', htmlFor: 'period-type' },
                         _d2I18n2.default.t('Period type')
                     ),
                     _react2.default.createElement(
@@ -156,62 +129,16 @@ var RelativePeriods = function (_Component) {
             );
         };
 
-        _this.render = function () {
-            var Options = _this.renderOptions();
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'selector-area' },
-                Options,
-                _react2.default.createElement(_PeriodsList2.default, {
-                    items: _this.props.items,
-                    onPeriodClick: _this.props.onPeriodClick,
-                    onPeriodDoubleClick: _this.props.onPeriodDoubleClick,
-                    listClassName: 'periods-list-offered'
-                }),
-                _react2.default.createElement(
-                    'div',
-                    { style: { textAlign: 'center' } },
-                    _react2.default.createElement(
-                        _Button2.default,
-                        { onClick: _this.selectAll },
-                        _d2I18n2.default.t('Select all')
-                    )
-                )
-            );
-        };
-
         _this.state = defaultState;
         _this.periodsGenerator = new _RelativePeriodsGenerator2.default();
         return _this;
     }
 
-    (0, _createClass3.default)(RelativePeriods, [{
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps) {
-            var prevItems = prevProps.selectedItems.map(function (period) {
-                return period.id;
-            });
-            var currentItems = this.props.selectedItems.map(function (period) {
-                return period.id;
-            });
-
-            if (!(0, _isEqual2.default)(prevItems, currentItems)) {
-                this.setOfferedPeriods(this.generatePeriods(this.state.periodType, this.state.year));
-            }
-        }
-    }]);
     return RelativePeriods;
 }(_react.Component);
 
 RelativePeriods.propTypes = {
-    items: _propTypes2.default.array.isRequired,
-    selectedItems: _propTypes2.default.array.isRequired,
-    setOfferedPeriods: _propTypes2.default.func.isRequired,
-    setOfferedPeriodIds: _propTypes2.default.func.isRequired,
-    onSelect: _propTypes2.default.func.isRequired,
-    onPeriodDoubleClick: _propTypes2.default.func.isRequired,
-    onPeriodClick: _propTypes2.default.func.isRequired
+    setOfferedPeriods: _propTypes2.default.func.isRequired
 };
 
 exports.default = RelativePeriods;

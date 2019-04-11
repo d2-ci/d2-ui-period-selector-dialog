@@ -102,7 +102,7 @@ var PeriodSelectorDialog = function (_React$Component) {
                 open = _this$props.open,
                 maxWidth = _this$props.maxWidth,
                 fullWidth = _this$props.fullWidth,
-                remaindingProps = (0, _objectWithoutProperties3.default)(_this$props, ['classes', 'open', 'maxWidth', 'fullWidth']);
+                rest = (0, _objectWithoutProperties3.default)(_this$props, ['classes', 'open', 'maxWidth', 'fullWidth']);
 
 
             return _react2.default.createElement(
@@ -121,7 +121,7 @@ var PeriodSelectorDialog = function (_React$Component) {
                 _react2.default.createElement(
                     _DialogContent2.default,
                     { className: classes.dialogContent },
-                    _react2.default.createElement(_PeriodSelector2.default, remaindingProps)
+                    _react2.default.createElement(_PeriodSelector2.default, rest)
                 ),
                 _react2.default.createElement(
                     _DialogActions2.default,
