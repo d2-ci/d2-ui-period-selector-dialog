@@ -18,7 +18,7 @@ function DailyPeriodType(formatYyyyMmDd, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('01 Jan ' + year);
 
         while (date.getFullYear() === year) {
@@ -46,7 +46,7 @@ function WeeklyPeriodType(formatYyyyMmDd, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('01 Jan ' + year);
         var day = date.getDay();
         var week = 1;
@@ -84,7 +84,7 @@ function BiWeeklyPeriodType(formatYyyyMmDd, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('01 Jan ' + year);
         var day = date.getDay();
         var biWeek = 1;
@@ -134,7 +134,7 @@ function MonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('31 Dec ' + year);
 
         while (date.getFullYear() === year) {
@@ -173,7 +173,7 @@ function BiMonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('31 Dec ' + year);
 
         while (date.getFullYear() === year) {
@@ -204,7 +204,7 @@ function QuarterlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('31 Dec ' + year);
         var quarter = 4;
 
@@ -237,7 +237,7 @@ function SixMonthlyPeriodType(monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
 
         var period = {};
         period.startDate = year + '-01-01';
@@ -268,7 +268,7 @@ function SixMonthlyAprilPeriodType(monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
 
         var period = {};
         period.startDate = year + '-04-01';
@@ -299,7 +299,7 @@ function YearlyPeriodType(formatYyyyMmDd, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('31 Dec ' + year);
 
         while (year - date.getFullYear() < 10) {
@@ -328,7 +328,7 @@ function FinancialOctoberPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('30 Sep ' + (year + 1));
 
         for (var i = 0; i < 10; i++) {
@@ -357,7 +357,7 @@ function FinancialJulyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('30 Jun ' + (year + 1));
 
         for (var i = 0; i < 10; i++) {
@@ -386,7 +386,7 @@ function FinancialAprilPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
         var offset = parseInt(config.offset, 10);
         var isFilter = config.filterFuturePeriods;
         var isReverse = config.reversePeriods;
-        var year = new Date().getFullYear() + offset;
+        var year = new Date(Date.now()).getFullYear() + offset;
         var date = new Date('31 Mar ' + (year + 1));
 
         for (var i = 0; i < 10; i++) {
@@ -425,7 +425,7 @@ function PeriodType() {
 
     var filterFuturePeriods = function filterFuturePeriods(periods) {
         var array = [];
-        var now = new Date();
+        var now = new Date(Date.now());
 
         for (var i = 0; i < periods.length; i++) {
             if (new Date(periods[i].startDate) <= now) {
