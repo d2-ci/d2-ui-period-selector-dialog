@@ -351,6 +351,35 @@ function FinancialOctoberPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
     };
 }
 
+function FinancialNovemberPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
+    this.generatePeriods = function (config) {
+        var periods = [];
+        var offset = parseInt(config.offset, 10);
+        var isFilter = config.filterFuturePeriods;
+        var isReverse = config.reversePeriods;
+        var year = new Date(Date.now()).getFullYear() + offset;
+        var date = new Date('31 Oct ' + (year + 1));
+
+        for (var i = 0; i < 10; i++) {
+            var period = {};
+            period.endDate = formatYyyyMmDd(date);
+            date.setYear(date.getFullYear() - 1);
+            date.setDate(date.getDate() + 1);
+            period.startDate = formatYyyyMmDd(date);
+            period.name = monthNames[10] + ' ' + date.getFullYear() + ' - ' + monthNames[9] + ' ' + (date.getFullYear() + 1);
+            period.id = date.getFullYear() + 'Nov';
+            periods.push(period);
+            date.setDate(date.getDate() - 1);
+        }
+
+        periods = isFilter ? fnFilter(periods) : periods;
+        periods = isReverse ? periods : periods.reverse();
+        // FinancialNovember periods are collected backwards. If isReverse is true, then do nothing. Else reverse to correct order and return.
+
+        return periods;
+    };
+}
+
 function FinancialJulyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
     this.generatePeriods = function (config) {
         var periods = [];
@@ -447,6 +476,7 @@ function PeriodType() {
     periodTypes['Six-monthly'] = new SixMonthlyPeriodType(monthNames, filterFuturePeriods);
     periodTypes['Six-monthly April'] = new SixMonthlyAprilPeriodType(monthNames, filterFuturePeriods);
     periodTypes.Yearly = new YearlyPeriodType(formatYyyyMmDd, filterFuturePeriods);
+    periodTypes['Financial year (Start November)'] = new FinancialNovemberPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
     periodTypes['Financial year (Start October)'] = new FinancialOctoberPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
     periodTypes['Financial year (Start July)'] = new FinancialJulyPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
     periodTypes['Financial year (Start April)'] = new FinancialAprilPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
