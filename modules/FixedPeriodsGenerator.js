@@ -159,12 +159,6 @@ function MonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
 }
 
 function BiMonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
-    var formatIso = function formatIso(date, index) {
-        var y = date.getFullYear();
-
-        return y + '0' + index + 'B';
-    };
-
     this.generatePeriods = function (config) {
         var periods = [];
         var offset = parseInt(config.offset, 10);
@@ -182,7 +176,7 @@ function BiMonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
             date.setDate(1);
             period.startDate = formatYyyyMmDd(date);
             period.name = monthNames[date.getMonth()] + ' - ' + monthNames[date.getMonth() + 1] + ' ' + date.getFullYear();
-            period.iso = formatIso(date, index);
+            period.iso = year + '0' + index + 'B';
             period.id = period.iso;
             periods.push(period);
             date.setDate(0);
