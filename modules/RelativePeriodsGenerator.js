@@ -26,6 +26,12 @@ var WeeksPeriodType = {
     }
 };
 
+var BiWeeksPeriodType = {
+    generatePeriods: function generatePeriods() {
+        return [{ id: 'THIS_BIWEEK', name: 'This bi-week' }, { id: 'LAST_BIWEEK', name: 'Last bi-week' }, { id: 'LAST_4_BIWEEKS', name: 'Last 4 bi-weeks' }];
+    }
+};
+
 var MonthsPeriodType = {
     generatePeriods: function generatePeriods() {
         return [{ id: 'THIS_MONTH', name: 'This month' }, { id: 'LAST_MONTH', name: 'Last month' }, { id: 'LAST_3_MONTHS', name: 'Last 3 months' }, { id: 'LAST_6_MONTHS', name: 'Last 6 months' }, { id: 'LAST_12_MONTHS', name: 'Last 12 months' }, { id: 'MONTHS_THIS_YEAR', name: 'Months this year' }];
@@ -34,7 +40,7 @@ var MonthsPeriodType = {
 
 var BiMonthsPeriodType = {
     generatePeriods: function generatePeriods() {
-        return [{ id: 'THIS_BIMOTNH', name: 'This bi-month' }, { id: 'LAST_BIMONTH', name: 'Last bi-month' }, { id: 'LAST_6_BIMONTHS', name: 'Last 6 bi-months' }, { id: 'BIMONTHS_THIS_YEAR', name: 'Bi-months this year' }];
+        return [{ id: 'THIS_BIMONTH', name: 'This bi-month' }, { id: 'LAST_BIMONTH', name: 'Last bi-month' }, { id: 'LAST_6_BIMONTHS', name: 'Last 6 bi-months' }, { id: 'BIMONTHS_THIS_YEAR', name: 'Bi-months this year' }];
     }
 };
 
@@ -69,6 +75,7 @@ var Generator = function Generator() {
     this.options = {
         Days: DaysPeriodType,
         Weeks: WeeksPeriodType,
+        'Bi-weeks': BiWeeksPeriodType,
         Months: MonthsPeriodType,
         'Bi-months': BiMonthsPeriodType,
         Quarters: QuartersPeriodType,
