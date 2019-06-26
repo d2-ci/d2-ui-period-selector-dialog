@@ -40,16 +40,17 @@ function DailyPeriodType(formatYyyyMmDd, fnFilter) {
     };
 }
 
+/*
 function WeeklyPeriodType(formatYyyyMmDd, fnFilter) {
-    this.generatePeriods = function (config) {
-        var periods = [];
-        var offset = parseInt(config.offset, 10);
-        var isFilter = config.filterFuturePeriods;
-        var isReverse = config.reversePeriods;
-        var year = new Date(Date.now()).getFullYear() + offset;
-        var date = new Date('01 Jan ' + year);
-        var day = date.getDay();
-        var week = 1;
+    this.generatePeriods = config => {
+        let periods = [];
+        const offset = parseInt(config.offset, 10);
+        const isFilter = config.filterFuturePeriods;
+        const isReverse = config.reversePeriods;
+        const year = new Date(Date.now()).getFullYear() + offset;
+        const date = new Date(`01 Jan ${year}`);
+        const day = date.getDay();
+        let week = 1;
 
         if (day <= 4) {
             date.setDate(date.getDate() - (day - 1));
@@ -58,13 +59,13 @@ function WeeklyPeriodType(formatYyyyMmDd, fnFilter) {
         }
 
         while (date.getFullYear() <= year) {
-            var period = {};
+            const period = {};
             period.startDate = formatYyyyMmDd(date);
-            period.iso = year + 'W' + week;
+            period.iso = `${year}W${week}`;
             period.id = period.iso;
             date.setDate(date.getDate() + 6);
             period.endDate = formatYyyyMmDd(date);
-            period.name = 'W' + week + ' - ' + period.startDate + ' - ' + period.endDate;
+            period.name = `W${week} - ${period.startDate} - ${period.endDate}`;
 
             // if end date is Jan 4th or later, week belongs to next year
             if (date.getFullYear() > year && date.getDate() >= 4) {
@@ -83,7 +84,61 @@ function WeeklyPeriodType(formatYyyyMmDd, fnFilter) {
 
         return periods;
     };
-}
+}*/
+
+function WeeklyPeriodType(formatYyyyMmDd, weekObj, fnFilter) {
+    // Calculate the first date of an EPI year base on ISO standard  ( first week always contains 4th Jan )
+    var getEpiWeekStartDay = function getEpiWeekStartDay(year, startDayOfWeek) {
+        var jan4 = new Date(year, 0, 4);
+        var jan4DayOfWeek = jan4.getDay();
+
+        var startDate = jan4;
+        var dayDiff = jan4DayOfWeek - startDayOfWeek;
+
+        if (dayDiff > 0) {
+            startDate.setDate(jan4.getDate() - dayDiff);
+        } else if (dayDiff < 0) {
+            startDate.setDate(jan4.getDate() - dayDiff);
+            startDate.setDate(startDate.getDate() - 7);
+        }
+
+        return startDate;
+    };
+
+    this.generatePeriods = function (config) {
+        var periods = [];
+        var offset = parseInt(config.offset, 10);
+        var isFilter = config.filterFuturePeriods;
+        var isReverse = config.reversePeriods;
+        var year = new Date(Date.now()).getFullYear() + offset;
+        var date = getEpiWeekStartDay(year, weekObj.startDay);
+        var week = 1;
+
+        while (date.getFullYear() <= year) {
+            var period = {};
+            period.startDate = formatYyyyMmDd(date);
+            date.setDate(date.getDate() + 6);
+            period.endDate = formatYyyyMmDd(date);
+            period.name = 'Week ' + week + ' - ' + period.startDate + ' - ' + period.endDate;
+            period.iso = '' + year + weekObj.shortName + 'W' + week;
+            period.id = period.iso;
+
+            if (date.getFullYear() > year && date.getDate() >= 4) {
+                break;
+            }
+
+            periods.push(period);
+            date.setDate(date.getDate() + 1);
+
+            week++;
+        };
+
+        periods = isFilter ? fnFilter(periods) : periods;
+        periods = isReverse ? periods.reverse() : periods;
+
+        return periods;
+    };
+};
 
 function BiWeeklyPeriodType(formatYyyyMmDd, fnFilter) {
     this.generatePeriods = function (config) {
@@ -131,59 +186,6 @@ function BiWeeklyPeriodType(formatYyyyMmDd, fnFilter) {
         return periods;
     };
 }
-
-function EpiWeeklyPeriodType(formatYyyyMmDd, weekObj, fnFilter) {
-    // Calculate the first date of an EPI year base on ISO standard  ( first week always contains 4th Jan )
-    var getEpiWeekStartDay = function getEpiWeekStartDay(year, startDayOfWeek) {
-        var jan4 = new Date(year, 0, 4);
-        var jan4DayOfWeek = jan4.getDay();
-
-        var startDate = jan4;
-        var dayDiff = jan4DayOfWeek - startDayOfWeek;
-
-        if (dayDiff > 0) {
-            startDate.setDate(jan4.getDate() - dayDiff);
-        } else if (dayDiff < 0) {
-            startDate.setDate(jan4.getDate() - dayDiff);
-            startDate.setDate(startDate.getDate() - 7);
-        }
-
-        return startDate;
-    };
-
-    this.generatePeriods = function (config) {
-        var periods = [];
-        var offset = parseInt(config.offset, 10);
-        var isFilter = config.filterFuturePeriods;
-        var isReverse = config.reversePeriods;
-        var year = new Date(Date.now()).getFullYear() + offset;
-        var startDate = getEpiWeekStartDay(year, weekObj.startDay);
-        var endDate = startDate;
-
-        for (var week = 1; week < 200; week++) {
-            var period = {};
-
-            period.startDate = formatYyyyMmDd(startDate);
-            endDate.setDate(startDate.getDate() + 6);
-            period.endDate = formatYyyyMmDd(endDate);
-            period.name = 'Week ' + week + ' - ' + period.startDate + ' - ' + period.endDate;
-            period.iso = '' + year + weekObj.shortName + 'W' + week;
-            period.id = period.iso;
-
-            periods.push(period);
-            startDate.setDate(endDate.getDate() + 1);
-
-            if (startDate.getMonth() === 0 && week > 50) {
-                break;
-            }
-        };
-
-        periods = isFilter ? fnFilter(periods) : periods;
-        periods = isReverse ? periods.reverse() : periods;
-
-        return periods;
-    };
-};
 
 function MonthlyPeriodType(formatYyyyMmDd, monthNames, fnFilter) {
     var formatIso = function formatIso(date) {
@@ -529,12 +531,12 @@ function PeriodType() {
     var periodTypes = [];
 
     periodTypes.Daily = new DailyPeriodType(formatYyyyMmDd, filterFuturePeriods);
-    periodTypes.Weekly = new WeeklyPeriodType(formatYyyyMmDd, filterFuturePeriods);
+    periodTypes.Weekly = new WeeklyPeriodType(formatYyyyMmDd, { shortName: '', startDay: 1 }, filterFuturePeriods);
     periodTypes['Bi-weekly'] = new BiWeeklyPeriodType(formatYyyyMmDd, filterFuturePeriods);
-    periodTypes['Weekly (Start Wednesday)'] = new EpiWeeklyPeriodType(formatYyyyMmDd, { shortName: 'Wed', startDay: 3 }, filterFuturePeriods);
-    periodTypes['Weekly (Start Thursday)'] = new EpiWeeklyPeriodType(formatYyyyMmDd, { shortName: 'Thu', startDay: 4 }, filterFuturePeriods);
-    periodTypes['Weekly (Start Saturday)'] = new EpiWeeklyPeriodType(formatYyyyMmDd, { shortName: 'Sat', startDay: 6 }, filterFuturePeriods);
-    periodTypes['Weekly (Start Sunday)'] = new EpiWeeklyPeriodType(formatYyyyMmDd, { shortName: 'Sun', startDay: 7 }, filterFuturePeriods);
+    periodTypes['Weekly (Start Wednesday)'] = new WeeklyPeriodType(formatYyyyMmDd, { shortName: 'Wed', startDay: 3 }, filterFuturePeriods);
+    periodTypes['Weekly (Start Thursday)'] = new WeeklyPeriodType(formatYyyyMmDd, { shortName: 'Thu', startDay: 4 }, filterFuturePeriods);
+    periodTypes['Weekly (Start Saturday)'] = new WeeklyPeriodType(formatYyyyMmDd, { shortName: 'Sat', startDay: 6 }, filterFuturePeriods);
+    periodTypes['Weekly (Start Sunday)'] = new WeeklyPeriodType(formatYyyyMmDd, { shortName: 'Sun', startDay: 7 }, filterFuturePeriods);
     periodTypes.Monthly = new MonthlyPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
     periodTypes['Bi-monthly'] = new BiMonthlyPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
     periodTypes.Quarterly = new QuarterlyPeriodType(formatYyyyMmDd, monthNames, filterFuturePeriods);
