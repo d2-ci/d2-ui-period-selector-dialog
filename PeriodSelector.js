@@ -28,7 +28,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _d2UiAnalytics = require('@dhis2/d2-ui-analytics');
+var _analytics = require('@dhis2/analytics');
 
 var _PeriodTypeButton = require('./PeriodTypeButton');
 
@@ -171,7 +171,7 @@ var PeriodSelector = function (_Component) {
                     'div',
                     { style: { display: 'flex', marginTop: '18px' } },
                     _react2.default.createElement(
-                        _d2UiAnalytics.ItemSelector,
+                        _analytics.ItemSelector,
                         {
                             itemClassName: 'period-selector',
                             unselected: unselected,
