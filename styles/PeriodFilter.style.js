@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     inputLabel: {
         color: '#494949',
-        whitSpace: 'nowrap'
+        whiteSpace: 'nowrap'
     }
 };
